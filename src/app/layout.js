@@ -9,6 +9,10 @@ export const metadata = {
 const RootLayout = ({ children }) => {
   return (
     <html lang="en">
+      <head>
+      <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      </head>
       <body className={`${primary.variable} ${secondary.variable}`}>
         <main>{children}</main>
       </body>

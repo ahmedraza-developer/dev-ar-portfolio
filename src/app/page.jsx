@@ -223,7 +223,7 @@ const Page = () => {
               </div>
               <div className="text-white">
                 <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">Message me</h4>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} method="POST">
                   <div className="sm:flex items-center gap-x-5">
                     <input type="text" name="name" id={referenceID} required placeholder="Name" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
                     <input type="email" name="email" id={referenceID} required placeholder="Email" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
