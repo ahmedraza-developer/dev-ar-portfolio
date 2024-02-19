@@ -1,6 +1,6 @@
 // Import Components
+import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/header";
-import Footer from "@/components/Footer/footer";
 
 const NotFound = () => {
     return (
