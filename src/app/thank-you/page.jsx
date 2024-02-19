@@ -1,6 +1,6 @@
 // Import Components
-import Footer from "@/components/footer/footer";
-import Header from "@/components/header/header";
+import Header from "@/components/Header/header";
+import Footer from "@/components/Footer/footer";
 import Link from "next/link";
 import Script from "next/script";
 
