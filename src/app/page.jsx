@@ -1,6 +1,6 @@
 "use client"
 // Hooks
-import { useId,useState } from "react";
+import { useId, useState, useEffect } from "react";
 // Components
 import TypingAnimation from "@/components/Animation/TypingAnimation";
 import Header from "@/components/Header/header";
@@ -10,6 +10,8 @@ import Card from "@/components/Card/card";
 // Next
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from 'next/router';
+import Axios from "axios";
 // Media
 import BG from "media/home/bg.gif"
 import Profile from "media/home/ar.jpg"
@@ -71,34 +73,86 @@ const Page = () => {
     },
   ]
   const referenceID = useId();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
+  const [ip, setIP] = useState('');
+  const [score, setScore] = useState('Send message');
+  const [pagenewurl, setPagenewurl] = useState('');
+
+  const getIPData = async () => {
+    try {
+      const res = await Axios.get('https://geolocation-db.com/json/f2e84010-e1e9-11ed-b2f8-6b70106be3c8');
+      setIP(res.data);
+    } catch (error) {
+      console.error('Error fetching IP data:', error);
+      // Handle the error, set default values, or take appropriate action
+    }
+  };
+
+  useEffect(() => {
+    getIPData();
+  }, []);
+
+  useEffect(() => {
+    const pagenewurl = window.location.href;
+    console.log(pagenewurl);
+    setPagenewurl(pagenewurl);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const currentdate = new Date().toLocaleString();
 
+    const data = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      subject: e.target.subject.value,
+      message: e.target.messages.value,
+      pageUrl: pagenewurl,
+      IP: `${ip.IPv4} - ${ip.country_name} - ${ip.city}`,
+      currentdate: currentdate,
+    };
+
+    const JSONdata = JSON.stringify(data);
+
+    setScore('Sending Data');
+    console.log(JSONdata);
     try {
-      const response = await fetch('/api/sendmail.js', {
+      const res = await fetch('/api/sendmail', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSONdata
       });
 
-      if (response.ok) {
-        // Optionally, redirect the user to a thank-you page
-        window.location.href = '/thank-you';
+      if (res.ok) {
+        console.log(`Response received ${res}`);
+        // Handle success if needed
       } else {
-        // Handle the error response
-        console.error('Error submitting form:', response.statusText);
+        console.error(`Error sending data. Status: ${res.status}`);
+        // Handle error if needed
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error sending data:', error);
+    }
+
+    // Second fetch for additional API
+    try {
+      const secondRes = await fetch('/api/sendmail', {
+        method: 'POST',
+        headers: headersList,
+        body: bodyContent
+      });
+
+      if (secondRes.ok) {
+        console.log(`Second API response received ${secondRes}`);
+        // Handle success if needed
+      } else {
+        console.error(`Error in the second API call. Status: ${secondRes.status}`);
+        // Handle error if needed
+      }
+    } catch (error) {
+      console.error('Error in the second API call:', error);
     }
   };
   return (
@@ -145,7 +199,7 @@ const Page = () => {
                 />
               </div>
               <div className="md:basis-[45%]">
-                <Image src={Profile} alt="profile" height={300} width={300} objectFit="cover" className="block mx-auto md:mt-0 mt-5 object-cover rounded-md"/>
+                <Image src={Profile} alt="profile" height={300} width={300} objectFit="cover" className="block mx-auto md:mt-0 mt-5 object-cover rounded-md" />
               </div>
             </div>
           </div>
@@ -229,8 +283,8 @@ const Page = () => {
                     <input type="email" name="email" id={referenceID} required placeholder="Email" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
                   </div>
                   <input type="text" name="subject" id={referenceID} required placeholder="Subject" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
-                  <textarea name="message" id={referenceID} required placeholder="Message..." className="w-full resize-none bg-transparent border-2 border-[#d3d3d3] rounded-md pt-4 pb-8 placeholder:text-white ps-4 mb-5"></textarea>
-                  <button type="submit" className="bg-transparent transition-all ease-in-out duration-500 border-2 border-secondary px-4 py-2 rounded-md text-secondary hover:text-white hover:bg-secondary">Send message</button>
+                  <textarea name="messages" id={referenceID} required placeholder="Message..." className="w-full resize-none bg-transparent border-2 border-[#d3d3d3] rounded-md pt-4 pb-8 placeholder:text-white ps-4 mb-5"></textarea>
+                  <button type="submit" className="bg-transparent transition-all ease-in-out duration-500 border-2 border-secondary px-4 py-2 rounded-md text-secondary hover:text-white hover:bg-secondary">{score}</button>
                 </form>
               </div>
             </div>
