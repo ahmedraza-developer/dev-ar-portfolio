@@ -116,7 +116,7 @@ const Page = () => {
     setScore('Sending Data');
     console.log(JSONdata);
     try {
-      const res = await fetch('/api/sendmail', {
+      const res = await fetch('/api/email', {
         method: 'POST',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -138,7 +138,7 @@ const Page = () => {
 
     // Second fetch for additional API
     try {
-      const secondRes = await fetch('/api/sendmail', {
+      const secondRes = await fetch('/api/email', {
         method: 'POST',
         headers: headersList,
         body: bodyContent
@@ -159,7 +159,7 @@ const Page = () => {
     <main>
       <Header />
       <section>
-        <div className="bg-[#000000] h-screen md:pt-48 md:pb-36 pt-36 pb-10">
+        <div className="bg-[#000000] h-screen md:pt-48 md:pb-36 pt-36 sm:pb-10 pb-5">
           <div className="container">
             <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-5 gap-5 items-center">
               <div className="text-white">
