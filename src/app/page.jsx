@@ -10,8 +10,7 @@ import Card from "@/components/Card/card";
 // Next
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from 'next/router';
-import Axios from "axios";
+import { Router } from 'next/router';
 // Media
 import BG from "media/home/bg.gif"
 import Profile from "media/home/ar.jpg"
@@ -73,88 +72,38 @@ const Page = () => {
     },
   ]
   const referenceID = useId();
-  const [ip, setIP] = useState('');
-  const [score, setScore] = useState('Send message');
-  const [pagenewurl, setPagenewurl] = useState('');
-
-  const getIPData = async () => {
-    try {
-      const res = await Axios.get('https://geolocation-db.com/json/f2e84010-e1e9-11ed-b2f8-6b70106be3c8');
-      setIP(res.data);
-    } catch (error) {
-      console.error('Error fetching IP data:', error);
-      // Handle the error, set default values, or take appropriate action
-    }
-  };
-
-  useEffect(() => {
-    getIPData();
-  }, []);
-
-  useEffect(() => {
-    const pagenewurl = window.location.href;
-    console.log(pagenewurl);
-    setPagenewurl(pagenewurl);
-  }, []);
-
+  const [score, setScore] = useState("Send Messege");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const currentdate = new Date().toLocaleString();
-
     const data = {
       name: e.target.name.value,
       email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.messages.value,
-      pageUrl: pagenewurl,
-      IP: `${ip.IPv4} - ${ip.country_name} - ${ip.city}`,
-      currentdate: currentdate,
-    };
+      phone: e.target.phone.value,
+      comment: e.target.comments.value,
+    }
 
     const JSONdata = JSON.stringify(data);
-
-    setScore('Sending Data');
     console.log(JSONdata);
-    try {
-      const res = await fetch('/api/email', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-        },
-        body: JSONdata
-      });
-
-      if (res.ok) {
-        console.log(`Response received ${res}`);
-        // Handle success if needed
-      } else {
-        console.error(`Error sending data. Status: ${res.status}`);
-        // Handle error if needed
+    setScore('Sending Data');
+    fetch('/api/email/sendmail', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSONdata
+    }).then((res) => {
+      console.log(`Response received ${res}`)
+      if (res.status === 200) {
+        console.log(`Response Successed ${res}`)
       }
-    } catch (error) {
-      console.error('Error sending data:', error);
+    })
+    const { pathname } = Router
+    if (pathname == pathname) {
+      window.location.href = '/thank-you';
     }
 
-    // Second fetch for additional API
-    try {
-      const secondRes = await fetch('/api/email', {
-        method: 'POST',
-        headers: headersList,
-        body: bodyContent
-      });
-
-      if (secondRes.ok) {
-        console.log(`Second API response received ${secondRes}`);
-        // Handle success if needed
-      } else {
-        console.error(`Error in the second API call. Status: ${secondRes.status}`);
-        // Handle error if needed
-      }
-    } catch (error) {
-      console.error('Error in the second API call:', error);
-    }
-  };
+  }
   return (
     <main>
       <Header />
@@ -283,7 +232,7 @@ const Page = () => {
                     <input type="email" name="email" id={referenceID} required placeholder="Email" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
                   </div>
                   <input type="text" name="subject" id={referenceID} required placeholder="Subject" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
-                  <textarea name="messages" id={referenceID} required placeholder="Message..." className="w-full resize-none bg-transparent border-2 border-[#d3d3d3] rounded-md pt-4 pb-8 placeholder:text-white ps-4 mb-5"></textarea>
+                  <textarea name="comments" id={referenceID} required placeholder="Message..." className="w-full resize-none bg-transparent border-2 border-[#d3d3d3] rounded-md pt-4 pb-8 placeholder:text-white ps-4 mb-5"></textarea>
                   <button type="submit" className="bg-transparent transition-all ease-in-out duration-500 border-2 border-secondary px-4 py-2 rounded-md text-secondary hover:text-white hover:bg-secondary">{score}</button>
                 </form>
               </div>
