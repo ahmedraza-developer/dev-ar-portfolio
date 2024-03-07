@@ -17,9 +17,9 @@ const Footer = () => {
                     <TypingAnimation strings={typed1} typeSpeed={100} backSpeed={100} loop={true} className="contact-us-typing" />
                 </h2>
                 <div className="flex justify-center items-center md:gap-x-24 gap-x-10 mt-10 mb-5">
-                    <Link href="https://www.facebook.com/"><Image src={Facebook} alt="Icons" width={30} height={30} /></Link>
-                    <Link href="https://twitter.com/"><Image src={Twitter} alt="Icons" width={30} height={30} /></Link>
-                    <Link href="https://www.instagram.com/"><Image src={Instagram} alt="Icons" width={30} height={30} /></Link>
+                    <Link href="https://www.facebook.com/ahmedraza1161/" target="_blank"><Image src={Facebook} alt="Icons" width={30} height={30} /></Link>
+                    <Link href="https://x.com/ahmedraza1161/" target="_blank"><Image src={Twitter} alt="Icons" width={30} height={30} /></Link>
+                    <Link href="https://www.instagram.com/ahmedraza1161/" target="_blank"><Image src={Instagram} alt="Icons" width={30} height={30} /></Link>
                     <Link href="https://api.whatsapp.com/send?phone=03009280169" target="_blank"><Image src={Whatsapp} alt="Icons" width={30} height={30} /></Link>
                 </div>
                 <span className="block text-center md:text-lg text-sm md:py-5 py-3 text-white font-sans">© 2024 <strong>Ahmed Raza</strong> | All Rights Reserved |</span>

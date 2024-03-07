@@ -108,9 +108,9 @@ const Page = () => {
     <main>
       <Header />
       <section>
-        <div className="bg-[#000000] h-screen md:pt-48 md:pb-36 pt-36 sm:pb-10 pb-5">
+        <div className="bg-[#000000] md:h-screen md:pt-48 md:pb-36 pt-36 pb-20">
           <div className="container">
-            <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-5 gap-5 items-center">
+            <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-5 gap-8 items-center">
               <div className="text-white">
                 <span className="block font-secondary md:text-[35px] text-xl leading-tigth">Hello, my name is</span>
                 <h1 className="lg:text-[60px] text-[40px] font-bold leading-tight my-2">Ahmed Raza</h1>
@@ -136,8 +136,7 @@ const Page = () => {
                 <h4 className="md:text-[25px] text-xl font-semibold py-2 leading-tigth">I'm Ahmed Raza. and I'm <TypingAnimation strings={typed1} typeSpeed={100} backSpeed={100} loop={true} className="about-us-typing" /> </h4>
                 <p className="md:text-base text-sm leading-normal font-medium">And I am 22 years young boy with dynamic and enthusiastic person looking for the job Web Design and Development mostly specializing in front end development. A firm believer in my own abilities, I am also a team player who thrives in a challenging environment.I am a junior with new and dynamics project ideas. Well-versed in numerous programming languages including HTML5, CSS3, JavaScript ES6, React-js, Next-js, Tailwind-CSS, and strong background in project management and customer relations.</p>
                 <CTA
-                  href="cv/sample.pdf"
-                  download="cv/sample.pdf"
+                  href="#contact-us"
                   text="Download CV"
                   color="text-white"
                   bg="bg-[#0e1538]"
@@ -231,7 +230,7 @@ const Page = () => {
                     <input type="text" name="name" id={referenceID} required placeholder="Name" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
                     <input type="email" name="email" id={referenceID} required placeholder="Email" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
                   </div>
-                  <input type="text" name="subject" id={referenceID} required placeholder="Subject" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
+                  <input type="text" name="phone" id={referenceID} required placeholder="Phone" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
                   <textarea name="comments" id={referenceID} required placeholder="Message..." className="w-full resize-none bg-transparent border-2 border-[#d3d3d3] rounded-md pt-4 pb-8 placeholder:text-white ps-4 mb-5"></textarea>
                   <button type="submit" className="bg-transparent transition-all ease-in-out duration-500 border-2 border-secondary px-4 py-2 rounded-md text-secondary hover:text-white hover:bg-secondary">{score}</button>
                 </form>
