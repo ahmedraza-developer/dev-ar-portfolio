@@ -68,7 +68,7 @@ const Page = () => {
     {
       icon: Mail,
       title: "Email",
-      desc: "ahmedrza14@gmail.com"
+      desc: "leadzahmed@gmail.com"
     },
   ]
   const referenceID = useId();
@@ -115,7 +115,7 @@ const Page = () => {
                 <span className="block font-secondary md:text-[35px] text-xl leading-tigth">Hello, my name is</span>
                 <h1 className="lg:text-[60px] text-[40px] font-bold leading-tight my-2">Ahmed Raza</h1>
                 <p className="block md:text-[30px] text-xl leading-tigth">And I'm <TypingAnimation strings={typed1} typeSpeed={100} backSpeed={100} loop={true} className="hero-typing" /> </p>
-                <Link href="mailto:ahmedrza14@gmail.com" className={`classbox text-xl`}> <span className="relative z-40 font-sans">Hire me</span> </Link>
+                <Link href="mailto:leadzahmed@gmail.com" className={`classbox text-xl`}> <span className="relative z-40 font-sans">Hire me</span> </Link>
               </div>
               <div className="">
                 <Image src={BG} alt="Gif" className="block mx-auto" />
