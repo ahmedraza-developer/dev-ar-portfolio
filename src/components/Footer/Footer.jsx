@@ -20,7 +20,7 @@ const Footer = () => {
                     <Link href="https://www.facebook.com/ahmedraza1161/" target="_blank"><Image src={Facebook} alt="Icons" width={30} height={30} /></Link>
                     <Link href="https://x.com/ahmedraza1161/" target="_blank"><Image src={Twitter} alt="Icons" width={30} height={30} /></Link>
                     <Link href="https://www.instagram.com/ahmedraza1161/" target="_blank"><Image src={Instagram} alt="Icons" width={30} height={30} /></Link>
-                    <Link href="https://api.whatsapp.com/send?phone=03009280169" target="_blank"><Image src={Whatsapp} alt="Icons" width={30} height={30} /></Link>
+                    <Link href="https://api.whatsapp.com/send?phone=03187380601" target="_blank"><Image src={Whatsapp} alt="Icons" width={30} height={30} /></Link>
                 </div>
                 <span className="block text-center md:text-lg text-sm md:py-5 py-3 text-white font-sans">© 2024 <strong>Ahmed Raza</strong> | All Rights Reserved |</span>
             </div>

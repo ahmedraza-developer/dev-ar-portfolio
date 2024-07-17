@@ -1,16 +1,15 @@
 "use client"
 // Hooks
-import { useId, useState, useEffect } from "react";
+import { useEffect, useId, useState } from "react";
 // Components
 import TypingAnimation from "@/components/Animation/TypingAnimation";
-import Header from "@/components/Header/header";
-import Footer from "@/components/Footer/Footer";
 import CTA from "@/components/CTA/CTA";
 import Card from "@/components/Card/card";
 // Next
 import Image from "next/image";
 import Link from "next/link";
 import { Router } from 'next/router';
+import Axios from "axios";
 // Media
 import BG from "media/home/bg.gif"
 import Profile from "media/home/ar.jpg"
@@ -19,7 +18,6 @@ import Location from "media/home/location.png"
 import Mail from "media/home/mail.png"
 // Globle CSS
 import "./globals.css";
-import Script from "next/script";
 const Page = () => {
   const typed1 = ["Front End Developer", "Using HTML5", "Using React-Js", "Using Next-Js", "Technician", "Freelancer"];
   const skills = [
@@ -71,15 +69,35 @@ const Page = () => {
       desc: "leadzahmed@gmail.com"
     },
   ]
+  const [ip, setIP] = useState('');
+  const getIPData = async () => {
+    const res = await Axios.get('https://geolocation-db.com/json/f2e84010-e1e9-11ed-b2f8-6b70106be3c8');
+    setIP(res.data);
+  }
+  useEffect(() => {
+    getIPData()
+  }, [])
+
   const referenceID = useId();
   const [score, setScore] = useState("Send Messege");
+  const currentRoute = Router.pathname;
+  const [pagenewurl, setPagenewurl] = useState('');
+  useEffect(() => {
+    const pagenewurl = window.location.href;
+    console.log(pagenewurl);
+    setPagenewurl(pagenewurl);
+  }, []);
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    let currentdate = new Date().toLocaleString() + ''
     const data = {
       name: e.target.name.value,
       email: e.target.email.value,
       phone: e.target.phone.value,
       comment: e.target.comments.value,
+      pageUrl: pagenewurl,
+      IP: `${ip.IPv4} - ${ip.country_name} - ${ip.city}`,
+      currentdate: currentdate,
     }
 
     const JSONdata = JSON.stringify(data);
@@ -98,6 +116,20 @@ const Page = () => {
         console.log(`Response Successed ${res}`)
       }
     })
+    let bodyContent = JSON.stringify({
+      "IP": `${ip.IPv4} - ${ip.country_name} - ${ip.city}`,
+      "Brand": "Persnol Portfolio AR",
+      "Page": `${currentRoute}`,
+      "Date": currentdate,
+      "Time": currentdate,
+      "JSON": JSONdata,
+
+    });
+    await fetch("https://sheetdb.io/api/v1/mzue1hrjpvgtm", {
+      method: "POST",
+      body: bodyContent
+    });
+
     const { pathname } = Router
     if (pathname == pathname) {
       window.location.href = '/thank-you';
@@ -106,7 +138,6 @@ const Page = () => {
   }
   return (
     <main>
-      <Header />
       <section>
         <div className="bg-[#000000] md:h-screen md:pt-48 md:pb-36 pt-36 pb-20">
           <div className="container">
@@ -239,7 +270,6 @@ const Page = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </main>
   )
 }

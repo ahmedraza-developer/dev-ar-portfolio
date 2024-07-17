@@ -22,7 +22,6 @@ const Page = () => {
                     </div>
                 </div>
             </section>
-            <Footer/>
         </main>
     );
 }
