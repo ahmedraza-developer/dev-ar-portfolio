@@ -167,7 +167,8 @@ const Page = () => {
                 <h4 className="md:text-[25px] text-xl font-semibold py-2 leading-tigth">I'm Ahmed Raza. and I'm <TypingAnimation strings={typed1} typeSpeed={100} backSpeed={100} loop={true} className="about-us-typing" /> </h4>
                 <p className="md:text-base text-sm leading-normal font-medium">And I am 22 years young boy with dynamic and enthusiastic person looking for the job Web Design and Development mostly specializing in front end development. A firm believer in my own abilities, I am also a team player who thrives in a challenging environment.I am a junior with new and dynamics project ideas. Well-versed in numerous programming languages including HTML5, CSS3, JavaScript ES6, React-js, Next-js, Tailwind-CSS, and strong background in project management and customer relations.</p>
                 <CTA
-                  href="#contact-us"
+                  href="/ar-cv.pdf"
+                  otherTags="download"
                   text="Download CV"
                   color="text-white"
                   bg="bg-[#0e1538]"

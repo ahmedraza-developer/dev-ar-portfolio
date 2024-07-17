@@ -12,10 +12,11 @@ const CTA = ({
     hover,
     margin,
     customCss,
+    otherTags=""
 }) => {
     return (
         <div dangerouslySetInnerHTML={{
-            __html: `<a href=${href} class="relative z-20 gap-2 cursor-pointer overflow-hidden block ${customCss} ${bg} ${color} ${width} text-center ${padding} ${textSize} ${border} ${margin} ${textWeight} duration-500 group ${rounded} ${hover}">${text}</a>`
+            __html: `<a href=${href} ${otherTags} class="relative z-20 gap-2 cursor-pointer overflow-hidden block ${customCss} ${bg} ${color} ${width} text-center ${padding} ${textSize} ${border} ${margin} ${textWeight} duration-500 group ${rounded} ${hover}">${text}</a>`
         }}>
 
         </div>
