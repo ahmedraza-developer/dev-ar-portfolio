@@ -9,7 +9,6 @@ import Card from "@/components/Card/card";
 import Image from "next/image";
 import Link from "next/link";
 import { Router } from 'next/router';
-import Axios from "axios";
 // Media
 import BG from "media/home/bg.gif"
 import Profile from "media/home/ar.jpg"
@@ -28,7 +27,7 @@ const Page = () => {
     },
     {
       title: "CSS",
-      pers: "80%",
+      pers: "90%",
       beforeWth: "before:w-[80%]",
     },
     {
@@ -45,12 +44,7 @@ const Page = () => {
       title: "Nextjs",
       pers: "70%",
       beforeWth: "before:w-[70%]",
-    },
-    {
-      title: "WordPress",
-      pers: "65%",
-      beforeWth: "before:w-[65%]",
-    },
+    }
   ]
   const contactIcon = [
     {
@@ -69,77 +63,44 @@ const Page = () => {
       desc: "leadzahmed@gmail.com"
     },
   ]
-  const [ip, setIP] = useState('');
-  const getIPData = async () => {
-    const res = await Axios.get('https://geolocation-db.com/json/f2e84010-e1e9-11ed-b2f8-6b70106be3c8');
-    setIP(res.data);
-  }
-  useEffect(() => {
-    getIPData()
-  }, [])
-
   const referenceID = useId();
-  const [score, setScore] = useState("Send Messege");
-  const currentRoute = Router.pathname;
-  const [pagenewurl, setPagenewurl] = useState('');
-  useEffect(() => {
-    const pagenewurl = window.location.href;
-    console.log(pagenewurl);
-    setPagenewurl(pagenewurl);
-  }, []);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    let currentdate = new Date().toLocaleString() + ''
-    const data = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      phone: e.target.phone.value,
-      comment: e.target.comments.value,
-      pageUrl: pagenewurl,
-      IP: `${ip.IPv4} - ${ip.country_name} - ${ip.city}`,
-      currentdate: currentdate,
-    }
+    e.preventDefault();
 
-    const JSONdata = JSON.stringify(data);
-    console.log(JSONdata);
-    setScore('Sending Data');
-    fetch('/api/email/sendmail', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSONdata
-    }).then((res) => {
-      console.log(`Response received ${res}`)
-      if (res.status === 200) {
-        console.log(`Response Successed ${res}`)
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxOSyy4qXJwLAbnqqTZScHhunIZQ-zEidC5snpbTGpFFC-1a_t_A15tRg8Km_8GPb79/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData),
+      });
+
+      const result = await response.json();
+      if (result.result === 'success') {
+        alert('Form submitted successfully!');
       }
-    })
-    let bodyContent = JSON.stringify({
-      "IP": `${ip.IPv4} - ${ip.country_name} - ${ip.city}`,
-      "Brand": "Persnol Portfolio AR",
-      "Page": `${currentRoute}`,
-      "Date": currentdate,
-      "Time": currentdate,
-      "JSON": JSONdata,
-
-    });
-    await fetch("https://sheetdb.io/api/v1/mzue1hrjpvgtm", {
-      method: "POST",
-      body: bodyContent
-    });
-
-    const { pathname } = Router
-    if (pathname == pathname) {
-      window.location.href = '/thank-you';
+    } catch (error) {
+      console.error('Error submitting the form:', error);
     }
-
-  }
+  };
   return (
     <main>
       <section>
-        <div className="bg-[#000000] md:h-screen md:pt-48 md:pb-36 pt-36 pb-20">
+        <div className="bg-[#000000] md:h-screen flex items-center justify-center md:pt-48 md:pb-36 pt-36 pb-20">
           <div className="container">
             <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-5 gap-8 items-center">
               <div className="text-white">
@@ -148,8 +109,8 @@ const Page = () => {
                 <p className="block md:text-[30px] text-xl leading-tigth">And I'm <TypingAnimation strings={typed1} typeSpeed={100} backSpeed={100} loop={true} className="hero-typing" /> </p>
                 <Link href="mailto:leadzahmed@gmail.com" className={`classbox text-xl`}> <span className="relative z-40 font-sans">Hire me</span> </Link>
               </div>
-              <div className="">
-                <Image src={BG} alt="Gif" className="block mx-auto" />
+              <div>
+                <Image unoptimized src={BG} alt="Gif" className="block mx-auto" />
               </div>
             </div>
           </div>
@@ -179,7 +140,7 @@ const Page = () => {
                 />
               </div>
               <div className="md:basis-[45%]">
-                <Image src={Profile} alt="profile" height={300} width={300} objectFit="cover" className="block mx-auto md:mt-0 mt-5 object-cover rounded-md" />
+                {/* <Image src={Profile} alt="profile" height={300} width={300} objectFit="cover" className="block mx-auto md:mt-0 mt-5 object-cover rounded-md" /> */}
               </div>
             </div>
           </div>
@@ -210,7 +171,6 @@ const Page = () => {
                 <h4 className="capitalize text-xl font-semibold mb-3">My creative skills & experiences.</h4>
                 <p className="text-base font-medium leading-normal mb-3">Since beginning my journey as a freelance developer nearly 1 month ago, I’ve done remote work for agencies, consulted for startups, and collaborated with talented people to create web products for both business and consumer use.</p>
                 <p className="text-base font-medium leading-normal mb-3">I create successful responsive websites that are fast, easy to use, and built with best practices. The main area of my expertise is front-end development, HTML, CSS, JS, building small and medium web apps, custom plugins, features, animations, and coding interactive layouts.</p>
-                <p className="text-base font-medium leading-normal mb-3">I also have full-stack developer experience with popular open-source CMS like (WordPress, bubble.io and others) .</p>
                 <CTA href="#contact-us" text="Learn More" bg="bg-transparent" color="text-[#ed143d]" border="border-2 border-[#ed143d]" padding="py-2 px-8" textSize="text-lg" rounded="rounded-lg" hover="hover:bg-[#ed143d] hover:text-white" />
               </div>
               <div className="text-black">
@@ -259,12 +219,12 @@ const Page = () => {
                 <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">Message me</h4>
                 <form onSubmit={handleSubmit} method="POST">
                   <div className="sm:flex items-center gap-x-5">
-                    <input type="text" name="name" id={referenceID} required placeholder="Name" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
-                    <input type="email" name="email" id={referenceID} required placeholder="Email" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} id={referenceID} required placeholder="Name" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} id={referenceID} required placeholder="Email" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
                   </div>
-                  <input type="text" name="phone" id={referenceID} required placeholder="Phone" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
-                  <textarea name="comments" id={referenceID} required placeholder="Message..." className="w-full resize-none bg-transparent border-2 border-[#d3d3d3] rounded-md pt-4 pb-8 placeholder:text-white ps-4 mb-5"></textarea>
-                  <button type="submit" className="bg-transparent transition-all ease-in-out duration-500 border-2 border-secondary px-4 py-2 rounded-md text-secondary hover:text-white hover:bg-secondary">{score}</button>
+                  <input type="text" name="phone" value={formData.phone} onChange={handleChange} id={referenceID} required placeholder="Phone" className="w-full bg-transparent border-2 border-[#d3d3d3] rounded-md py-3 placeholder:text-white ps-4 mb-5" />
+                  <textarea name="message" value={formData.message} onChange={handleChange} id={referenceID} required placeholder="Message..." className="w-full resize-none bg-transparent border-2 border-[#d3d3d3] rounded-md pt-4 pb-8 placeholder:text-white ps-4 mb-5"></textarea>
+                  <button type="submit" className="bg-transparent transition-all ease-in-out duration-500 border-2 border-secondary px-4 py-2 rounded-md text-secondary hover:text-white hover:bg-secondary">Send Messege</button>
                 </form>
               </div>
             </div>

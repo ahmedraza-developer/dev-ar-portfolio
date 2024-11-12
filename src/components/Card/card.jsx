@@ -23,31 +23,7 @@ const Card = () => {
             desc: "I provide SEO in every business for getting there business in first ,which helps people to make stand there business in google search first.",
             bfGredient: "before:bg-gradient-to-tr from-[#4dff03] to-[#00d0ff]",
             afGredient: "after:bg-gradient-to-tr from-[#4dff03] to-[#00d0ff]"
-        },
-        {
-            beforeBg: "before:group-hover:bg-[url('../../public/home/video-camera.png')]",
-            afterBg: "after:group-hover:bg-[url('../../public/home/video-camera.png')]",
-            title: "video Editing",
-            desc: "In this competitive world video editing is necessary in any of the digital platform. Most of the eCommerce website needs video in there which which make there customer attractive.",
-            bfGredient: "before:bg-gradient-to-tr from-[#eecda3] to-[#ef629f]",
-            afGredient: "after:bg-gradient-to-tr from-[#eecda3] to-[#ef629f]"
-        },
-        {
-            beforeBg: "before:group-hover:bg-[url('../../public/home/bars-chart.png')]",
-            afterBg: "after:group-hover:bg-[url('../../public/home/bars-chart.png')]",
-            title: "Digital Marketing",
-            desc: "Digital Marketing is the only tools which helps people to build advertised there business digitally which make people more attracted to there products and there business.",
-            bfGredient: "before:bg-gradient-to-tr from-[#c33764] to-[#1d2671]",
-            afGredient: "after:bg-gradient-to-tr from-[#c33764] to-[#1d2671]"
-        },
-        {
-            beforeBg: "before:group-hover:bg-[url('../../public/home/android.png')]",
-            afterBg: "after:group-hover:bg-[url('../../public/home/android.png')]",
-            title: "App Development",
-            desc: "Apps helps to those people who are not mostly friendly towards the website.Apps helps people in user interface which make them easier.",
-            bfGredient: "before:bg-gradient-to-tr from-[#36d1dc] to-[#5b86e5]",
-            afGredient: "after:bg-gradient-to-tr from-[#36d1dc] to-[#5b86e5]"
-        },
+        }
     ]
     return (
         <>

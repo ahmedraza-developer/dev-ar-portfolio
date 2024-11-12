@@ -1,5 +1,4 @@
 // Import Components
-import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/header";
 
 const NotFound = () => {

@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 export default async function POST(req, res) {
     try {
-        const { name, email, phone, comment, IP } = await req.body;
+        const { name, email, phone, comment } = await req.body;
         const transporter = nodemailer.createTransport({
             service: "gmail",
             host: "smtp.gmail.com",
@@ -32,10 +32,6 @@ export default async function POST(req, res) {
                     <tr>
                         <th>Message</th>
                         <td>${comment}</td>
-                    </tr>
-                    <tr>
-                        <th>IP</th>
-                        <td>${IP}</td>
                     </tr>
             </table>`
         };
