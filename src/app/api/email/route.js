@@ -1,21 +1,26 @@
-const nodemailer = require("nodemailer");
-export default async function POST(req, res) {
+import nodemailer from 'nodemailer';
+
+export async function POST(req, res) {
     try {
-        const { name, email, phone, comment } = await req.body;
+        const { name, email, phone, message } = await req.json();
+        if (!name || !email || !message) {
+            return res.status(400).json({
+                message: "Name, email, and message are required fields.",
+                status: 400
+            });
+        }
         const transporter = nodemailer.createTransport({
-            service: "gmail",
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
+            host: 'smtp.mailtrap.io',
+            port: 2525,
             auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
-            }
-        })
+                user: "3aebaff76c7c33",
+                pass: "e29c7cbb5c82c0",
+            },
+        });
         const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER,
-            subject: `New Messege By Ahmed Raza Portfolio`,
+            from: email,
+            to: "leadzahmed@gmail.com",
+            subject: `New Message by Ahmed Raza - Portfolio`,
             html: `<table>
                     <tr>
                         <th>Name</th>
@@ -31,16 +36,24 @@ export default async function POST(req, res) {
                     </tr>
                     <tr>
                         <th>Message</th>
-                        <td>${comment}</td>
+                        <td>${message}</td>
                     </tr>
-            </table>`
+            </table>`,
         };
+
+        // Send the email
         await transporter.sendMail(mailOptions);
-        return res.json({ message: "Email send sucessfully", status: 200 });
+
+        // Return success response
+        return res.status(200).json({
+            message: "Email sent successfully",
+            status: 200,
+        });
     } catch (error) {
-        return res.json({
-            message: "Failed to send Email",
-            data: error,
+        console.error("Error sending email:", error);
+        return res.status(500).json({
+            message: "Failed to send email",
+            error: error.message,
             status: 500,
         });
     }

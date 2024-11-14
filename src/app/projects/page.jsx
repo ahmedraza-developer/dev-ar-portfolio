@@ -470,7 +470,7 @@ const Projects = () => {
         </div>
       </section>
       <section>
-        <div className="py-[100px]">
+        <div className="lg:py-[100px] md:py-[80px] py-[60px]">
           <div className="container">
             <div className="text-center text-black mb-5">
               <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
@@ -482,7 +482,7 @@ const Projects = () => {
             </div>
             <div className="pt-[40px]">
               <Tabs defaultValue="all">
-                <TabsList className="flex bg-transparent gap-x-10 h-full">
+                <TabsList className="flex flex-wrap bg-transparent gap-y-5 gap-x-10 h-full">
                   {[
                     "all",
                     "websites",
@@ -492,7 +492,7 @@ const Projects = () => {
                   ].map((e, i) => (
                     <TabsTrigger
                       key={i}
-                      className="!w-[12%] capitalize py-3"
+                      className="xl:!w-[12%] !w-max capitalize py-3"
                       value={e}
                     >
                       {e}

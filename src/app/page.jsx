@@ -1,6 +1,6 @@
 "use client"
 // Hooks
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 // Components
 import TypingAnimation from "@/components/Animation/TypingAnimation";
 import CTA from "@/components/CTA/CTA";
@@ -8,7 +8,6 @@ import Card from "@/components/Card/card";
 // Next
 import Image from "next/image";
 import Link from "next/link";
-import { Router } from 'next/router';
 // Media
 import BG from "media/home/bg.gif"
 import Profile from "media/home/ar.jpg"
@@ -28,7 +27,17 @@ const Page = () => {
     {
       title: "CSS",
       pers: "90%",
-      beforeWth: "before:w-[80%]",
+      beforeWth: "before:w-[90%]",
+    },
+    {
+      title: "Bootstrap 4,5",
+      pers: "90%",
+      beforeWth: "before:w-[90%]",
+    },
+    {
+      title: "Tailwind CSS",
+      pers: "90%",
+      beforeWth: "before:w-[90%]",
     },
     {
       title: "JavaScript",
@@ -36,15 +45,30 @@ const Page = () => {
       beforeWth: "before:w-[60%]",
     },
     {
-      title: "React",
-      pers: "70%",
-      beforeWth: "before:w-[70%]",
+      title: "Reactjs",
+      pers: "50%",
+      beforeWth: "before:w-[50%]",
     },
     {
       title: "Nextjs",
       pers: "70%",
       beforeWth: "before:w-[70%]",
-    }
+    },
+    {
+      title: "Framer Motion",
+      pers: "50%",
+      beforeWth: "before:w-[50%]",
+    },
+    {
+      title: "Mongo DB",
+      pers: "50%",
+      beforeWth: "before:w-[50%]",
+    },
+    {
+      title: "GIT",
+      pers: "70%",
+      beforeWth: "before:w-[70%]",
+    },
   ]
   const contactIcon = [
     {
@@ -67,36 +91,43 @@ const Page = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    message: ''
+    phone:'',
+    message: '',
   });
+  const [status, setStatus] = useState(null);
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Post request to the API route
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxOSyy4qXJwLAbnqqTZScHhunIZQ-zEidC5snpbTGpFFC-1a_t_A15tRg8Km_8GPb79/exec', {
+      setStatus('Sending...');
+      const response = await fetch('/api/email', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
-        body: new URLSearchParams(formData),
+        body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-      if (result.result === 'success') {
-        alert('Form submitted successfully!');
+      const data = await response.json();
+      if (data.success) {
+        setStatus('Message sent successfully!');
+      } else {
+        setStatus('Something went wrong. Please try again.');
       }
     } catch (error) {
-      console.error('Error submitting the form:', error);
+      setStatus('Failed to send message. Please try again.');
     }
   };
+
   return (
     <main>
       <section>
@@ -126,9 +157,9 @@ const Page = () => {
             <div className="md:flex items-center gap-x-5">
               <div className="md:basis-[55%]">
                 <h4 className="md:text-[25px] text-xl font-semibold py-2 leading-tigth">I'm Ahmed Raza. and I'm <TypingAnimation strings={typed1} typeSpeed={100} backSpeed={100} loop={true} className="about-us-typing" /> </h4>
-                <p className="md:text-base text-sm leading-normal font-medium">And I am 22 years young boy with dynamic and enthusiastic person looking for the job Web Design and Development mostly specializing in front end development. A firm believer in my own abilities, I am also a team player who thrives in a challenging environment.I am a junior with new and dynamics project ideas. Well-versed in numerous programming languages including HTML5, CSS3, JavaScript ES6, React-js, Next-js, Tailwind-CSS, and strong background in project management and customer relations.</p>
+                <p className="md:text-base text-sm leading-normal font-medium">And I’m a 23-year-old web developer specializing in front-end development, with a strong focus on HTML5, CSS3, JavaScript (ES6), React.js, Next.js, and TailwindCSS. Passionate about creating responsive, user-friendly web applications, I thrive in dynamic, collaborative environments. I bring fresh ideas to the table and am committed to continuous learning and improvement. With a solid understanding of project management and client relations, I ensure timely delivery of high-quality solutions that meet client needs. Driven by a love for problem-solving, I focus on both functionality and design in every project.</p>
                 <CTA
-                  href="/ar-cv.pdf"
+                  href="/ahmedraza.pdf"
                   otherTags="download"
                   text="Download CV"
                   color="text-white"
@@ -140,7 +171,7 @@ const Page = () => {
                 />
               </div>
               <div className="md:basis-[45%]">
-                {/* <Image src={Profile} alt="profile" height={300} width={300} objectFit="cover" className="block mx-auto md:mt-0 mt-5 object-cover rounded-md" /> */}
+                <Image src={Profile} alt="profile" height={300} width={300} objectFit="cover" className="block mx-auto md:mt-0 mt-5 object-cover rounded-md" />
               </div>
             </div>
           </div>
@@ -166,11 +197,11 @@ const Page = () => {
               <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">My skills</h2>
               <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tigth md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3">What I Know</span>
             </div>
-            <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-10 gap-10 pt-10">
+            <div className="grid md:grid-cols-2 grid-cols-1 items-center md:gap-x-10 gap-10 pt-10">
               <div className="text-black">
                 <h4 className="capitalize text-xl font-semibold mb-3">My creative skills & experiences.</h4>
-                <p className="text-base font-medium leading-normal mb-3">Since beginning my journey as a freelance developer nearly 1 month ago, I’ve done remote work for agencies, consulted for startups, and collaborated with talented people to create web products for both business and consumer use.</p>
-                <p className="text-base font-medium leading-normal mb-3">I create successful responsive websites that are fast, easy to use, and built with best practices. The main area of my expertise is front-end development, HTML, CSS, JS, building small and medium web apps, custom plugins, features, animations, and coding interactive layouts.</p>
+                <p className="text-base font-medium leading-normal mb-3">Since embarking on my journey as a web developer nearly three years ago, I have had the privilege of collaborating with agencies, consulting for startups, and working alongside talented professionals to create dynamic web products for both business and consumer markets. My expertise lies in front-end development, where I specialize in building responsive, performant, and user-friendly websites and web applications.</p>
+                <p className="text-base font-medium leading-normal mb-3">I create fast, intuitive, and accessible web experiences using industry-standard best practices. My work spans a wide range of front-end development tasks</p>
                 <CTA href="#contact-us" text="Learn More" bg="bg-transparent" color="text-[#ed143d]" border="border-2 border-[#ed143d]" padding="py-2 px-8" textSize="text-lg" rounded="rounded-lg" hover="hover:bg-[#ed143d] hover:text-white" />
               </div>
               <div className="text-black">

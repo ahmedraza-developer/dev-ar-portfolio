@@ -32,7 +32,7 @@ const Header = ({
                                     ["Skills","#skills"],
                                     ["Contact","#contact-us"],
                                 ].map(([text,link],i)=>(
-                                    <li key={i} className="md:text-white md:mb-0 mb-5 text-black"><Link href={link} className={`relative block transition-all duration-500 ease-in-out text-sm md:text-base lg:text-lg font-medium ${linkHover}`}>{text}</Link></li>
+                                    <li key={i} className="md:text-white md:mb-0 mb-5 text-black"><Link href={link} onClick={() => setToggler(false)} className={`relative block transition-all duration-500 ease-in-out text-sm md:text-base lg:text-lg font-medium ${linkHover}`}>{text}</Link></li>
                                 ))
                             }
                         </ul>
