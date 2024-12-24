@@ -11,7 +11,7 @@ export async function POST(req) {
           message: "Name, email, and message are required fields.",
           success: false,
         },
-        { status: 400 }
+        { status: 400 } 
       )
     }
     const transporter = nodemailer.createTransport({
