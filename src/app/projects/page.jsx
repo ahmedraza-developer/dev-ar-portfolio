@@ -8,6 +8,7 @@ import { useState } from "react"
 import TypingAnimation from "@/components/Animation/TypingAnimation"
 // Components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs"
+import FrontEndForm from "@/components/ForntEndForm/ForntEndForm"
 // Media
 import BG from "media/home/bg.gif"
 import Website1 from "media/projects/websites/1.png"
@@ -42,6 +43,9 @@ import EmailTemplates4 from "media/projects/email-templates/4.png"
 import EmailTemplates5 from "media/projects/email-templates/5.png"
 import EmailTemplates6 from "media/projects/email-templates/6.png"
 import EmailTemplates7 from "media/projects/email-templates/7.png"
+import Contact from "media/home/contact.png"
+import Location from "media/home/location.png"
+import Mail from "media/home/mail.png"
 import Eye from "media/projects/eye.png"
 const Projects = () => {
   const typed1 = [
@@ -428,10 +432,29 @@ const Projects = () => {
       "https://farooqaziz.netlify.app/work/infinityanimations-email-template/",
     ],
   ]
+  const contactIcon = [
+    {
+      icon: Contact,
+      title: "Name",
+      desc: "Ahmed Raza",
+    },
+    {
+      icon: Location,
+      title: "Address",
+      desc: "Karachi-Pakistan",
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      desc: "leadzahmed@gmail.com",
+    },
+  ]
   const [visibleCount, setVisibleCount] = useState(9)
   const handleLoadMore = () => {
-    setVisibleCount((prevCount) => Math.min(prevCount + 9, items && items?.length));
-  };
+    setVisibleCount((prevCount) =>
+      Math.min(prevCount + 9, items && items?.length)
+    )
+  }
   return (
     <main>
       <section>
@@ -558,6 +581,53 @@ const Projects = () => {
                   Load More
                 </button>
               )}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="contact-us">
+        <div className="lg:py-28 md:py-20 py-10 bg-black">
+          <div className="container">
+            <div className="text-center text-white mb-10">
+              <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
+                Contact me
+              </h2>
+              <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tigth md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3">
+                Get In Touch
+              </span>
+            </div>
+            <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-10 gap-10">
+              <div className="text-white">
+                <h4 className="capitalize md:text-xl text-lg font-semibold mb-3">
+                  Get in Touch
+                </h4>
+                <p className="md:text-base text-sm font-medium leading-normal mb-5">
+                  If you are interested in working together? Please fill out the
+                  form aside with some info about your project and I will get
+                  back to you as soon as I can. Please allow a couple days for
+                  me to respond.
+                </p>
+                {contactIcon &&
+                  contactIcon.map((e, i) => (
+                    <div key={i} className="flex gap-x-5 mb-5 items-center">
+                      <div>
+                        <Image src={e.icon} alt="Icons" />
+                      </div>
+                      <div>
+                        <p className="text-base font-semibold">{e.title}</p>
+                        <span className="block md:text-xl text-lg font-medium">
+                          {e.desc}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <div className="text-white">
+                <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">
+                  Message me
+                </h4>
+                <FrontEndForm />
+              </div>
             </div>
           </div>
         </div>
