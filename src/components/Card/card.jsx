@@ -51,33 +51,30 @@ const Card = () => {
             afGredient: "after:bg-gradient-to-tr from-[#c33764] to-[#1d2671]"
         },
     ]
+    const { ref: cardRef, inView: cardInView } = useInView({
+        triggerOnce: true,
+        threshold: 0.3,
+    });
     return (
         <>
-            {animateCard.map((e, i) => {
-                const { ref, inView } = useInView({
-                    triggerOnce: true,
-                    threshold: 0.3,
-                });
-
-                return (
-                    <motion.div
-                        key={i}
-                        ref={ref}
-                        className={`relative group transition-all duration-500 flex justify-center items-center h-[400px] my-[40px] mx-[30px] before:absolute before:top-0 before:left-[50px] before:w-[50%] before:h-full before:bg-white before:skew-x-[15deg] ${e.bfGredient} before:hover:skew-x-0 before:hover:left-5 before:hover:w-full before:transition-all before:duration-500 after:absolute after:top-0 after:left-[50px] after:w-[50%] after:h-full after:bg-white after:rounded-lg after:transform after:skew-x-[15deg] after:blur-[30px] ${e.afGredient} after:hover:skew-x-0 after:hover:left-5 after:hover:w-full after:transition-all after:duration-500`}
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 50 }}
-                        transition={{
-                            delay: i * 0.2,
-                            duration: 0.5,
-                        }}
-                    >
-                        <div className="relative h-[80%] left-0 py-[20px] px-[30px] bg-white bg-opacity-5 shadow-md rounded-lg backdrop-blur-md z-10 transition-all duration-500 text-white group-hover:py-[60px] group-hover:-left-[25px]">
-                            <h3 className="text-2xl leading-tight font-bold">{e.title}</h3>
-                            <p className="p-3 2xl:text-base text-sm tracking-widest leading-tight my-3">{e.desc}</p>
-                        </div>
-                    </motion.div>
-                );
-            })}
+            {animateCard.map((e, i) => (
+                <motion.div
+                    key={i}
+                    ref={cardRef}
+                    className={`relative group transition-all duration-500 flex justify-center items-center h-[400px] my-[40px] mx-[30px] before:absolute before:top-0 before:left-[50px] before:w-[50%] before:h-full before:bg-white before:skew-x-[15deg] ${e.bfGredient} before:hover:skew-x-0 before:hover:left-5 before:hover:w-full before:transition-all before:duration-500 after:absolute after:top-0 after:left-[50px] after:w-[50%] after:h-full after:bg-white after:rounded-lg after:transform after:skew-x-[15deg] after:blur-[30px] ${e.afGredient} after:hover:skew-x-0 after:hover:left-5 after:hover:w-full after:transition-all after:duration-500`}
+                    initial={{ opacity: 0.5, y: 50 }}
+                    animate={{ opacity: cardInView ? 1 : 0.2, y: cardInView ? 0.2 : 50 }}
+                    transition={{
+                        delay: i * 0.2,
+                        duration: 0.5,
+                    }}
+                >
+                    <div className="relative h-[80%] left-0 py-[20px] px-[30px] bg-white bg-opacity-5 shadow-md rounded-lg backdrop-blur-md z-10 transition-all duration-500 text-white group-hover:py-[60px] group-hover:-left-[25px]">
+                        <h3 className="text-2xl leading-tight font-bold">{e.title}</h3>
+                        <p className="p-3 2xl:text-base text-sm tracking-widest leading-tight my-3">{e.desc}</p>
+                    </div>
+                </motion.div>
+            ))}
         </>
     );
 }
