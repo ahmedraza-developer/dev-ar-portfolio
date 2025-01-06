@@ -1,4 +1,6 @@
 "use client"
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
 // Next
 import Image from "next/image"
 import Link from "next/link"
@@ -47,6 +49,7 @@ import Contact from "media/home/contact.png"
 import Location from "media/home/location.png"
 import Mail from "media/home/mail.png"
 import Eye from "media/projects/eye.png"
+import { Button } from "@/components/ui/Button"
 const Projects = () => {
   const typed1 = [
     "Front End Developer",
@@ -56,382 +59,384 @@ const Projects = () => {
     "Technician",
     "Freelancer",
   ]
-  const items = [
-    [
-      Website1,
-      ["Nextjs 13", "Bootstrap 5", "Jquery"],
-      "https://crystallitedigital.com/",
-    ],
-    [
-      Website2,
-      ["Nextjs 14", "Tailwind Css", "Shadcn Ui"],
-      "https://infinityanimations.com/",
-    ],
-    [
-      Ecommerce1,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Javascript"],
-      "https://fsf-mart-pk.netlify.app/",
-    ],
-    [
-      Ecommerce2,
+  const projectsData = {
+    all: [
       [
-        "Nextjs 14",
-        "Tailwind Css",
-        "React Hook Form",
-        "Shadcn Ui",
-        "Magic Ui",
-        "Reactjs 18",
-        "Typescript",
+        Website1,
+        ["Nextjs 13", "Bootstrap 5", "Jquery"],
+        "https://crystallitedigital.com/",
       ],
-      "https://ecommerce-nextjs-sandy-one.vercel.app/",
-    ],
-    [
-      Lp1,
-      ["HTML 5", "CSS 3", "Jquery", "Slick"],
-      "https://jumpto1.com/children-book-illustration-services/",
-    ],
-    [
-      Lp2,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla"],
-      "https://jumpto1.com/ios-app-development-services/",
-    ],
-    [
-      Lp3,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://jumpto1.com/page-view/",
-    ],
-    [
-      Lp4,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://jumpto1.com/page-view-1/",
-    ],
-    [
-      Website3,
       [
-        "HTML 5",
-        "CSS 3",
-        "Bootstrap 5",
-        "Php",
-        "Jquery",
-        "Javascript",
-        "Slick",
+        Website2,
+        ["Nextjs 14", "Tailwind Css", "Shadcn Ui"],
+        "https://infinityanimations.com/",
       ],
-      "https://portfolio.mhrizwan.com/web-apps/001/",
-    ],
-    [
-      Lp5,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla", "GSAP"],
-      "https://seoresultspro.com/seo-services/",
-    ],
-    [
-      Website4,
-      ["HTML 5", "Tailwind CSS", "Javascript", "Embla"],
-      "https://portfolio.mhrizwan.com/websites/001/",
-    ],
-    [
-      Website5,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/",
-    ],
-    [
-      Website6,
       [
-        "Nextjs 14",
-        "Tailwind CSS",
-        "Javascript",
-        "Swiper",
-        "Slick",
-        "Material Tailwind",
+        Ecommerce1,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Javascript"],
+        "https://fsf-mart-pk.netlify.app/",
       ],
-      "https://webiste-design-hub.vercel.app/",
-    ],
-    [
-      Website7,
-      ["Nextjs 14", "Tailwind CSS"],
-      "https://www.mini-investments.net/",
-    ],
-    [
-      Lp6,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/children-book-illustrator/",
-    ],
-    [
-      Lp7,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookpublishingservice.us/",
-    ],
-    [
-      Lp8,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/amazon-book-publishing-services/",
-    ],
-    [
-      Lp9,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/audio-book-production-services/",
-    ],
-    [
-      Lp10,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/lp/book-publishing-services/",
-    ],
-    [
-      Lp11,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/marketing-lp2/",
-    ],
-    [
-      Lp12,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/case-studies",
-    ],
-    [
-      Lp13,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/book-marketing-company",
-    ],
-    [
-      Lp14,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/lp/book-marketing-company",
-    ],
-    [
-      Lp15,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/lp/book-publishing-company",
-    ],
-    [
-      Lp16,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/audiobook-production-services",
-    ],
-    [
-      EmailTemplates1,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/jumpto1-email-template-helloween/",
-    ],
-    [
-      EmailTemplates2,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/infinityanimations-email-template-helloween/",
-    ],
-    [
-      EmailTemplates3,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/h&w-email-template-2/",
-    ],
-    [
-      EmailTemplates4,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/h&w-email-template-1/",
-    ],
-    [
-      EmailTemplates5,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/bitswits-email-template/",
-    ],
-    [
-      EmailTemplates6,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/infinityanimations-email-template-thankyou/",
-    ],
-    [
-      EmailTemplates7,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/infinityanimations-email-template/",
-    ],
-  ]
-  const items2 = [
-    [
-      Website1,
-      ["Nextjs 13", "Bootstrap 5", "Jquery"],
-      "https://crystallitedigital.com/",
-    ],
-    [
-      Website2,
-      ["Nextjs 14", "Tailwind Css", "Shadcn Ui"],
-      "https://infinityanimations.com/",
-    ],
-    [
-      Website3,
       [
-        "HTML 5",
-        "CSS 3",
-        "Bootstrap 5",
-        "Php",
-        "Jquery",
-        "Javascript",
-        "Slick",
+        Ecommerce2,
+        [
+          "Nextjs 14",
+          "Tailwind Css",
+          "React Hook Form",
+          "Shadcn Ui",
+          "Magic Ui",
+          "Reactjs 18",
+          "Typescript",
+        ],
+        "https://ecommerce-nextjs-sandy-one.vercel.app/",
       ],
-      "https://portfolio.mhrizwan.com/web-apps/001/",
-    ],
-    [
-      Website4,
-      ["HTML 5", "Tailwind CSS", "Javascript", "Embla"],
-      "https://portfolio.mhrizwan.com/websites/001/",
-    ],
-    [
-      Website5,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/",
-    ],
-    [
-      Website6,
       [
-        "Nextjs 14",
-        "Tailwind CSS",
-        "Javascript",
-        "Swiper",
-        "Slick",
-        "Material Tailwind",
+        Lp1,
+        ["HTML 5", "CSS 3", "Jquery", "Slick"],
+        "https://jumpto1.com/children-book-illustration-services/",
       ],
-      "https://webiste-design-hub.vercel.app/",
-    ],
-    [
-      Website7,
-      ["Nextjs 14", "Tailwind CSS"],
-      "https://www.mini-investments.net/",
-    ],
-  ]
-  const items3 = [
-    [
-      Lp1,
-      ["HTML 5", "CSS 3", "Jquery", "Slick"],
-      "https://jumpto1.com/children-book-illustration-services/",
-    ],
-    [
-      Lp2,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla"],
-      "https://jumpto1.com/ios-app-development-services/",
-    ],
-    [
-      Lp3,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://jumpto1.com/page-view/",
-    ],
-    [
-      Lp4,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://jumpto1.com/page-view-1/",
-    ],
-    [
-      Lp5,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla", "GSAP"],
-      "https://seoresultspro.com/seo-services/",
-    ],
-    [
-      Lp6,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/children-book-illustrator/",
-    ],
-    [
-      Lp7,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookpublishingservice.us/",
-    ],
-    [
-      Lp8,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/amazon-book-publishing-services/",
-    ],
-    [
-      Lp9,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/audio-book-production-services/",
-    ],
-    [
-      Lp10,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/lp/book-publishing-services/",
-    ],
-    [
-      Lp11,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
-      "https://www.bookwritingcube.com/marketing-lp2/",
-    ],
-    [
-      Lp12,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/case-studies",
-    ],
-    [
-      Lp13,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/book-marketing-company",
-    ],
-    [
-      Lp14,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/lp/book-marketing-company",
-    ],
-    [
-      Lp15,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/lp/book-publishing-company",
-    ],
-    [
-      Lp16,
-      ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
-      "https://bestsellingpublisher.com/audiobook-production-services",
-    ],
-  ]
-  const items4 = [
-    [
-      Ecommerce1,
-      ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Javascript"],
-      "https://fsf-mart-pk.netlify.app/",
-    ],
-    [
-      Ecommerce2,
       [
-        "Nextjs 14",
-        "Tailwind Css",
-        "React Hook Form",
-        "Shadcn Ui",
-        "Magic Ui",
-        "Reactjs 18",
-        "Typescript",
+        Lp2,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla"],
+        "https://jumpto1.com/ios-app-development-services/",
       ],
-      "https://ecommerce-nextjs-sandy-one.vercel.app/",
+      [
+        Lp3,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://jumpto1.com/page-view/",
+      ],
+      [
+        Lp4,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://jumpto1.com/page-view-1/",
+      ],
+      [
+        Website3,
+        [
+          "HTML 5",
+          "CSS 3",
+          "Bootstrap 5",
+          "Php",
+          "Jquery",
+          "Javascript",
+          "Slick",
+        ],
+        "https://portfolio.mhrizwan.com/web-apps/001/",
+      ],
+      [
+        Lp5,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla", "GSAP"],
+        "https://seoresultspro.com/seo-services/",
+      ],
+      [
+        Website4,
+        ["HTML 5", "Tailwind CSS", "Javascript", "Embla"],
+        "https://portfolio.mhrizwan.com/websites/001/",
+      ],
+      [
+        Website5,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/",
+      ],
+      [
+        Website6,
+        [
+          "Nextjs 14",
+          "Tailwind CSS",
+          "Javascript",
+          "Swiper",
+          "Slick",
+          "Material Tailwind",
+        ],
+        "https://webiste-design-hub.vercel.app/",
+      ],
+      [
+        Website7,
+        ["Nextjs 14", "Tailwind CSS"],
+        "https://www.mini-investments.net/",
+      ],
+      [
+        Lp6,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/children-book-illustrator/",
+      ],
+      [
+        Lp7,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookpublishingservice.us/",
+      ],
+      [
+        Lp8,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/amazon-book-publishing-services/",
+      ],
+      [
+        Lp9,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/audio-book-production-services/",
+      ],
+      [
+        Lp10,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/lp/book-publishing-services/",
+      ],
+      [
+        Lp11,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/marketing-lp2/",
+      ],
+      [
+        Lp12,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/case-studies",
+      ],
+      [
+        Lp13,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/book-marketing-company",
+      ],
+      [
+        Lp14,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/lp/book-marketing-company",
+      ],
+      [
+        Lp15,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/lp/book-publishing-company",
+      ],
+      [
+        Lp16,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/audiobook-production-services",
+      ],
+      [
+        EmailTemplates1,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/jumpto1-email-template-helloween/",
+      ],
+      [
+        EmailTemplates2,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/infinityanimations-email-template-helloween/",
+      ],
+      [
+        EmailTemplates3,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/h&w-email-template-2/",
+      ],
+      [
+        EmailTemplates4,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/h&w-email-template-1/",
+      ],
+      [
+        EmailTemplates5,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/bitswits-email-template/",
+      ],
+      [
+        EmailTemplates6,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/infinityanimations-email-template-thankyou/",
+      ],
+      [
+        EmailTemplates7,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/infinityanimations-email-template/",
+      ],
     ],
-  ]
-  const items5 = [
-    [
-      EmailTemplates1,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/jumpto1-email-template-helloween/",
+    website: [
+      [
+        Website1,
+        ["Nextjs 13", "Bootstrap 5", "Jquery"],
+        "https://crystallitedigital.com/",
+      ],
+      [
+        Website2,
+        ["Nextjs 14", "Tailwind Css", "Shadcn Ui"],
+        "https://infinityanimations.com/",
+      ],
+      [
+        Website3,
+        [
+          "HTML 5",
+          "CSS 3",
+          "Bootstrap 5",
+          "Php",
+          "Jquery",
+          "Javascript",
+          "Slick",
+        ],
+        "https://portfolio.mhrizwan.com/web-apps/001/",
+      ],
+      [
+        Website4,
+        ["HTML 5", "Tailwind CSS", "Javascript", "Embla"],
+        "https://portfolio.mhrizwan.com/websites/001/",
+      ],
+      [
+        Website5,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/",
+      ],
+      [
+        Website6,
+        [
+          "Nextjs 14",
+          "Tailwind CSS",
+          "Javascript",
+          "Swiper",
+          "Slick",
+          "Material Tailwind",
+        ],
+        "https://webiste-design-hub.vercel.app/",
+      ],
+      [
+        Website7,
+        ["Nextjs 14", "Tailwind CSS"],
+        "https://www.mini-investments.net/",
+      ],
     ],
-    [
-      EmailTemplates2,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/infinityanimations-email-template-helloween/",
+    landingPages: [
+      [
+        Lp1,
+        ["HTML 5", "CSS 3", "Jquery", "Slick"],
+        "https://jumpto1.com/children-book-illustration-services/",
+      ],
+      [
+        Lp2,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla"],
+        "https://jumpto1.com/ios-app-development-services/",
+      ],
+      [
+        Lp3,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://jumpto1.com/page-view/",
+      ],
+      [
+        Lp4,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://jumpto1.com/page-view-1/",
+      ],
+      [
+        Lp5,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla", "GSAP"],
+        "https://seoresultspro.com/seo-services/",
+      ],
+      [
+        Lp6,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/children-book-illustrator/",
+      ],
+      [
+        Lp7,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookpublishingservice.us/",
+      ],
+      [
+        Lp8,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/amazon-book-publishing-services/",
+      ],
+      [
+        Lp9,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/audio-book-production-services/",
+      ],
+      [
+        Lp10,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/lp/book-publishing-services/",
+      ],
+      [
+        Lp11,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
+        "https://www.bookwritingcube.com/marketing-lp2/",
+      ],
+      [
+        Lp12,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/case-studies",
+      ],
+      [
+        Lp13,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/book-marketing-company",
+      ],
+      [
+        Lp14,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/lp/book-marketing-company",
+      ],
+      [
+        Lp15,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/lp/book-publishing-company",
+      ],
+      [
+        Lp16,
+        ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
+        "https://bestsellingpublisher.com/audiobook-production-services",
+      ],
     ],
-    [
-      EmailTemplates3,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/h&w-email-template-2/",
+    ecommerce: [
+      [
+        Ecommerce1,
+        ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Javascript"],
+        "https://fsf-mart-pk.netlify.app/",
+      ],
+      [
+        Ecommerce2,
+        [
+          "Nextjs 14",
+          "Tailwind Css",
+          "React Hook Form",
+          "Shadcn Ui",
+          "Magic Ui",
+          "Reactjs 18",
+          "Typescript",
+        ],
+        "https://ecommerce-nextjs-sandy-one.vercel.app/",
+      ],
     ],
-    [
-      EmailTemplates4,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/h&w-email-template-1/",
+    emailTemplates: [
+      [
+        EmailTemplates1,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/jumpto1-email-template-helloween/",
+      ],
+      [
+        EmailTemplates2,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/infinityanimations-email-template-helloween/",
+      ],
+      [
+        EmailTemplates3,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/h&w-email-template-2/",
+      ],
+      [
+        EmailTemplates4,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/h&w-email-template-1/",
+      ],
+      [
+        EmailTemplates5,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/bitswits-email-template/",
+      ],
+      [
+        EmailTemplates6,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/infinityanimations-email-template-thankyou/",
+      ],
+      [
+        EmailTemplates7,
+        ["HTML 5", "CSS3"],
+        "https://farooqaziz.netlify.app/work/infinityanimations-email-template/",
+      ],
     ],
-    [
-      EmailTemplates5,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/bitswits-email-template/",
-    ],
-    [
-      EmailTemplates6,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/infinityanimations-email-template-thankyou/",
-    ],
-    [
-      EmailTemplates7,
-      ["HTML 5", "CSS3"],
-      "https://farooqaziz.netlify.app/work/infinityanimations-email-template/",
-    ],
-  ]
+  };
   const contactIcon = [
     {
       icon: Contact,
@@ -449,34 +454,55 @@ const Projects = () => {
       desc: "leadzahmed@gmail.com",
     },
   ]
-  const [visibleCount, setVisibleCount] = useState(9)
+  const [visibleCount, setVisibleCount] = useState(6);
   const handleLoadMore = () => {
-    setVisibleCount((prevCount) =>
-      Math.min(prevCount + 9, items && items?.length)
-    )
-  }
+    setVisibleCount((prev) => prev + 6);
+  };
+  const { ref:projectsRef, inView:projectsInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  });
+  const { ref: contactUsRef, inView: contactUsInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  });
   return (
     <main>
       <section>
-        <div className="bg-[#000000] md:h-screen flex items-center justify-center md:pt-48 md:pb-36 pt-36 pb-20">
+        <motion.div
+          className="bg-[#000000] md:h-screen flex items-center justify-center md:pt-48 md:pb-36 pt-36 pb-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
           <div className="container">
             <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-5 gap-8 items-center">
-              <div className="text-white">
+              <motion.div
+                className="text-white"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1 }}
+              >
                 <span className="block font-secondary md:text-[35px] text-xl leading-tigth">
                   Hello, my name is
                 </span>
-                <h1 className="lg:text-[60px] text-[40px] font-bold leading-tight my-2">
+                <motion.h1
+                  className="lg:text-[60px] text-[40px] font-bold leading-tight my-2"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1 }}
+                >
                   Ahmed Raza
-                </h1>
+                </motion.h1>
                 <p className="block md:text-[30px] text-xl leading-tigth">
-                  And I'm
+                  And I'm{" "}
                   <TypingAnimation
                     strings={typed1}
                     typeSpeed={100}
                     backSpeed={100}
                     loop={true}
                     className="hero-typing"
-                  />
+                  />{" "}
                 </p>
                 <Link
                   href="mailto:leadzahmed@gmail.com"
@@ -484,154 +510,188 @@ const Projects = () => {
                 >
                   <span className="relative z-40 font-sans">Hire me</span>
                 </Link>
-              </div>
-              <div>
-                <Image src={BG} alt="Gif" className="block mx-auto" />
-              </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+              >
+                <Image
+                  unoptimized
+                  src={BG}
+                  alt="Gif"
+                  className="block mx-auto"
+                />
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
-      <section>
-        <div className="lg:py-[100px] md:py-[80px] py-[60px]">
-          <div className="container">
-            <div className="text-center text-black mb-5">
-              <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
-                Projects
-              </h2>
-              <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tigth md:before:w-12 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-12 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-12 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-12 after:-right-8 md:after:bottom-4 after:bottom-3">
-                Behind the Code
-              </span>
-            </div>
-            <div className="pt-[40px]">
-              <Tabs defaultValue="all">
-                <TabsList className="flex flex-wrap bg-transparent gap-y-5 gap-x-10 h-full">
-                  {[
-                    "all",
-                    "websites",
-                    "landing pages",
-                    "eCommerce",
-                    "email templates",
-                  ].map((e, i) => (
-                    <TabsTrigger
-                      key={i}
-                      className="xl:!w-[12%] !w-max capitalize py-3"
-                      value={e}
-                    >
-                      {e}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-                {[
-                  { value: "all", items: items },
-                  { value: "websites", items: items2 },
-                  { value: "landing pages", items: items3 },
-                  { value: "eCommerce", items: items4 },
-                  { value: "email templates", items: items5 },
-                ].map(({ value, items }, idx) => (
-                  <TabsContent key={idx} value={value} className="mt-16">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
-                      {items
-                        .slice(0, visibleCount)
-                        .map(([img, tags, link], i) => (
-                          <div
-                            key={i}
-                            className="relative group overflow-hidden h-full"
-                          >
-                            <div className="overflow-hidden h-full">
-                              <Image
-                                src={img}
-                                alt={`${value} Preview`}
-                                className="group-hover:scale-105 h-full transition-all duration-500 ease-in-out"
-                              />
-                            </div>
-                            <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:block opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-end justify-between">
-                              <div className="flex flex-wrap gap-2">
-                                {tags.map((tag, j) => (
-                                  <span
-                                    key={j}
-                                    className="text-xs md:text-sm text-white font-bold bg-opacity-50 border border-white rounded px-3 py-1"
-                                  >
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
-                              <Link href={link} target="_blank">
-                                <Image
-                                  src={Eye}
-                                  alt="View Project"
-                                  width={30}
-                                  height={30}
-                                  className="transition-transform transform hover:scale-110"
-                                />
-                              </Link>
-                            </div>
-                          </div>
-                        ))}
-                    </div>
-                  </TabsContent>
-                ))}
-              </Tabs>
-              {visibleCount < items.length && (
-                <button
-                  onClick={handleLoadMore}
-                  className="block mt-10 px-8 py-3 mx-auto bg-blue/90 text-white rounded hover:bg-blue/70"
+      <motion.section
+      ref={projectsRef}
+      className="lg:py-[100px] md:py-[80px] py-[60px]"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: projectsInView ? 1 : 0, y: projectsInView ? 0 : 50 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+    >
+      <div className="container">
+        <div className="text-center text-black mb-5">
+          <motion.h2
+            className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: projectsInView ? 1 : 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            Projects
+          </motion.h2>
+          <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tight md:before:w-12 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-12 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-12 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-12 after:-right-8 md:after:bottom-4 after:bottom-3">
+            Behind the Code
+          </span>
+        </div>
+
+        <div className="pt-[40px]">
+          <Tabs defaultValue="all">
+            <TabsList className="flex flex-wrap bg-transparent gap-y-5 gap-x-10 h-full">
+              {Object.keys(projectsData).map((category, i) => (
+                <TabsTrigger
+                  key={i}
+                  className="xl:!w-[12%] !w-max capitalize py-3"
+                  value={category}
                 >
-                  Load More
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="contact-us">
-        <div className="lg:py-28 md:py-20 py-10 bg-black">
-          <div className="container">
-            <div className="text-center text-white mb-10">
-              <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
-                Contact me
-              </h2>
-              <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tigth md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3">
-                Get In Touch
-              </span>
-            </div>
-            <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-10 gap-10">
-              <div className="text-white">
-                <h4 className="capitalize md:text-xl text-lg font-semibold mb-3">
-                  Get in Touch
-                </h4>
-                <p className="md:text-base text-sm font-medium leading-normal mb-5">
-                  If you are interested in working together? Please fill out the
-                  form aside with some info about your project and I will get
-                  back to you as soon as I can. Please allow a couple days for
-                  me to respond.
-                </p>
-                {contactIcon &&
-                  contactIcon.map((e, i) => (
-                    <div key={i} className="flex gap-x-5 mb-5 items-center">
-                      <div>
-                        <Image src={e.icon} alt="Icons" />
+                  {category}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+
+            {Object.entries(projectsData).map(([category, items], idx) => (
+              <TabsContent key={idx} value={category} className="mt-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
+                  {items.slice(0, visibleCount).map(([img, tags, link], i) => (
+                    <motion.div
+                      key={i}
+                      className="relative group overflow-hidden h-full"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: projectsInView ? 1 : 0, y: projectsInView ? 0 : 20 }}
+                      transition={{ duration: 0.6, delay: i * 0.2 }}
+                    >
+                      <div className="overflow-hidden h-full">
+                        <Image
+                          src={img}
+                          alt={`${category} Preview`}
+                          className="group-hover:scale-105 h-full transition-all duration-500 ease-in-out"
+                        />
                       </div>
-                      <div>
-                        <p className="text-base font-semibold">{e.title}</p>
-                        <span className="block md:text-xl text-lg font-medium">
-                          {e.desc}
-                        </span>
+                      <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:block opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-end justify-between">
+                        <div className="flex flex-wrap gap-2">
+                          {tags.map((tag, j) => (
+                            <span
+                              key={j}
+                              className="text-xs md:text-sm text-white font-bold bg-opacity-50 border border-white rounded px-3 py-1"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <Link href={link} target="_blank">
+                          <Image
+                            src={Eye}
+                            alt="View Project"
+                            width={30}
+                            height={30}
+                            className="transition-transform transform hover:scale-110"
+                          />
+                        </Link>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
-              </div>
-              <div className="text-white">
-                <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">
-                  Message me
-                </h4>
-                <FrontEndForm />
-              </div>
-            </div>
+                </div>
+                {items.length > 6 && visibleCount < items.length && (
+                  <Button
+                    onClick={handleLoadMore}
+                    className="block bg-secondary border-2 transition-all ease-in-out duration-500 border-secondary text-lg text-white leading-tight font-medium h-[55px] w-[200px] rounded-md mt-10 hover:bg-transparent hover:rounded-[50px] hover:text-secondary mx-auto"
+                  >
+                    Load More
+                  </Button>
+                )}
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
+      </div>
+    </motion.section>
+      <motion.section
+        id="contact-us"
+        ref={contactUsRef}
+        className="lg:py-28 md:py-20 py-10 bg-black"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: contactUsInView ? 1 : 0, y: contactUsInView ? 0 : 50 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="container">
+          <div className="text-center text-white mb-10">
+            <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
+              Contact me
+            </h2>
+            <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tight md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3">
+              Get In Touch
+            </span>
+          </div>
+
+          <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-10 gap-10">
+            <motion.div
+              className="text-white"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: contactUsInView ? 1 : 0, x: contactUsInView ? 0 : -50 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h4 className="capitalize md:text-xl text-lg font-semibold mb-3">
+                Get in Touch
+              </h4>
+              <p className="md:text-base text-sm font-medium leading-normal mb-5">
+                If you are interested in working together? Please fill out the
+                form aside with some info about your project and I will get
+                back to you as soon as I can. Please allow a couple of days for
+                me to respond.
+              </p>
+
+              {contactIcon &&
+                contactIcon.map((e, i) => (
+                  <motion.div
+                    key={i}
+                    className="flex gap-x-5 mb-5 items-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: contactUsInView ? 1 : 0, y: contactUsInView ? 0 : 20 }}
+                    transition={{ duration: 0.6, delay: i * 0.2 }}
+                  >
+                    <div>
+                      <Image src={e.icon} alt="Icons" />
+                    </div>
+                    <div>
+                      <p className="text-base font-semibold">{e.title}</p>
+                      <span className="block md:text-xl text-lg font-medium">
+                        {e.desc}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+            </motion.div>
+
+            <motion.div
+              className="text-white"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: contactUsInView ? 1 : 0, x: contactUsInView ? 0 : 50 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">
+                Message me
+              </h4>
+              <FrontEndForm />
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </main>
   )
 }

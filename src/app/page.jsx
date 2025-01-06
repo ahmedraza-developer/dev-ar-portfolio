@@ -1,22 +1,18 @@
 "use client"
-// Hooks
-import { useId, useState } from "react"
-// Components
 import TypingAnimation from "@/components/Animation/TypingAnimation"
 import CTA from "@/components/CTA/CTA"
 import Card from "@/components/Card/card"
-// Next
 import Image from "next/image"
 import Link from "next/link"
-// Media
 import BG from "media/home/bg.gif"
 import Profile from "media/home/ar.jpg"
 import Contact from "media/home/contact.png"
 import Location from "media/home/location.png"
 import Mail from "media/home/mail.png"
-// Globle CSS
 import "./globals.css"
 import FrontEndForm from "@/components/ForntEndForm/ForntEndForm"
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
 const Page = () => {
   const typed1 = [
     "Front End Developer",
@@ -95,20 +91,51 @@ const Page = () => {
       desc: "leadzahmed@gmail.com",
     },
   ]
+  const { ref: aboutRef, inView: aboutInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
 
+  const { ref: servicesRef, inView: servicesInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+  const { ref: skillsRef, inView: skillsInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  });
+  const { ref: contactUsRef, inView: contactUsInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  });
   return (
     <main>
       <section>
-        <div className="bg-[#000000] md:h-screen flex items-center justify-center md:pt-48 md:pb-36 pt-36 pb-20">
+        <motion.div
+          className="bg-[#000000] md:h-screen flex items-center justify-center md:pt-48 md:pb-36 pt-36 pb-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
           <div className="container">
             <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-5 gap-8 items-center">
-              <div className="text-white">
+              <motion.div
+                className="text-white"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1 }}
+              >
                 <span className="block font-secondary md:text-[35px] text-xl leading-tigth">
                   Hello, my name is
                 </span>
-                <h1 className="lg:text-[60px] text-[40px] font-bold leading-tight my-2">
+                <motion.h1
+                  className="lg:text-[60px] text-[40px] font-bold leading-tight my-2"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1 }}
+                >
                   Ahmed Raza
-                </h1>
+                </motion.h1>
                 <p className="block md:text-[30px] text-xl leading-tigth">
                   And I'm{" "}
                   <TypingAnimation
@@ -123,24 +150,33 @@ const Page = () => {
                   href="mailto:leadzahmed@gmail.com"
                   className={`classbox text-xl`}
                 >
-                  {" "}
-                  <span className="relative z-40 font-sans">Hire me</span>{" "}
+                  <span className="relative z-40 font-sans">Hire me</span>
                 </Link>
-              </div>
-              <div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+              >
                 <Image
                   unoptimized
                   src={BG}
                   alt="Gif"
                   className="block mx-auto"
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
-      <section id="about-us">
-        <div className="lg:py-28 md:py-20 py-10">
+      <section id="about-us" ref={aboutRef}>
+        <motion.div
+          className="lg:py-28 md:py-20 py-10"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: aboutInView ? 1 : 0, y: aboutInView ? 0 : 50 }}
+          transition={{ duration: 1 }}
+        >
           <div className="container">
             <div className="text-center text-black mb-5">
               <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
@@ -151,7 +187,12 @@ const Page = () => {
               </span>
             </div>
             <div className="md:flex items-center gap-x-5">
-              <div className="md:basis-[55%]">
+              <motion.div
+                className="md:basis-[55%]"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: aboutInView ? 1 : 0, x: aboutInView ? 0 : -50 }}
+                transition={{ duration: 1 }}
+              >
                 <h4 className="md:text-[25px] text-xl font-semibold py-2 leading-tigth">
                   I'm Ahmed Raza. and I'm{" "}
                   <TypingAnimation
@@ -175,19 +216,19 @@ const Page = () => {
                   problem-solving, I focus on both functionality and design in
                   every project.
                 </p>
-                <CTA
+                <Link
                   href="/ahmedraza.pdf"
-                  otherTags="download"
-                  text="Download CV"
-                  color="text-white"
-                  bg="bg-[#0e1538]"
-                  margin="my-4"
-                  rounded="rounded-lg"
-                  padding="py-4 px-10"
-                  border="border-2 border-[#1c6cd9]"
-                />
-              </div>
-              <div className="md:basis-[45%]">
+                  className={`text-white bg-[#0e1538] rounded-lg py-4 px-10 border-2 border-[#1c6cd9] my-4`}
+                >
+                  Download CV
+                </Link>
+              </motion.div>
+              <motion.div
+                className="md:basis-[45%]"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: aboutInView ? 1 : 0, scale: aboutInView ? 1 : 0.8 }}
+                transition={{ duration: 1 }}
+              >
                 <Image
                   src={Profile}
                   alt="profile"
@@ -196,13 +237,19 @@ const Page = () => {
                   objectFit="cover"
                   className="block mx-auto md:mt-0 mt-5 object-cover rounded-md"
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
-      <section id="services">
-        <div className="lg:py-28 md:py-20 py-10 bg-black">
+
+      <section id="services" ref={servicesRef}>
+        <motion.div
+          className="lg:py-28 md:py-20 py-10 bg-black"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: servicesInView ? 1 : 0, y: servicesInView ? 0 : 50 }}
+          transition={{ duration: 1 }}
+        >
           <div className="container">
             <div className="text-center text-white">
               <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
@@ -212,29 +259,60 @@ const Page = () => {
                 What I Provide{" "}
               </span>
             </div>
-            <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center gap-x-10 pt-10">
-              <Card />
-            </div>
+            <motion.div
+              className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center gap-x-10 pt-10"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: servicesInView ? 1 : 0, y: servicesInView ? 0 : 50 }}
+              transition={{ duration: 1 }}
+            >
+              <Card /> {/* Assuming you have a Card component for each service */}
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
-      <section id="skills">
+      <motion.section
+        id="skills"
+        ref={skillsRef}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: skillsInView ? 1 : 0 }}
+        transition={{ duration: 1 }}
+      >
         <div className="lg:py-28 md:py-20 py-10">
           <div className="container">
             <div className="text-center text-black mb-5">
-              <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
+              <motion.h2
+                className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4"
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: skillsInView ? 0 : 50, opacity: skillsInView ? 1 : 0 }}
+                transition={{ duration: 0.7 }}
+              >
                 My skills
-              </h2>
-              <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tigth md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3">
+              </motion.h2>
+              <motion.span
+                className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tigth md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3"
+                initial={{ x: -50, opacity: 0 }}
+                animate={{ x: skillsInView ? 0 : -50, opacity: skillsInView ? 1 : 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+              >
                 What I Know
-              </span>
+              </motion.span>
             </div>
             <div className="grid md:grid-cols-2 grid-cols-1 items-center md:gap-x-10 gap-10 pt-10">
               <div className="text-black">
-                <h4 className="capitalize text-xl font-semibold mb-3">
+                <motion.h4
+                  className="capitalize text-xl font-semibold mb-3"
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: skillsInView ? 0 : 50, opacity: skillsInView ? 1 : 0 }}
+                  transition={{ duration: 0.7, delay: 0.4 }}
+                >
                   My creative skills & experiences.
-                </h4>
-                <p className="text-base font-medium leading-normal mb-3">
+                </motion.h4>
+                <motion.p
+                  className="text-base font-medium leading-normal mb-3"
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: skillsInView ? 0 : 50, opacity: skillsInView ? 1 : 0 }}
+                  transition={{ duration: 0.7, delay: 0.6 }}
+                >
                   Since embarking on my journey as a web developer nearly three
                   years ago, I have had the privilege of collaborating with
                   agencies, consulting for startups, and working alongside
@@ -242,12 +320,17 @@ const Page = () => {
                   business and consumer markets. My expertise lies in front-end
                   development, where I specialize in building responsive,
                   performant, and user-friendly websites and web applications.
-                </p>
-                <p className="text-base font-medium leading-normal mb-3">
+                </motion.p>
+                <motion.p
+                  className="text-base font-medium leading-normal mb-3"
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: skillsInView ? 0 : 50, opacity: skillsInView ? 1 : 0 }}
+                  transition={{ duration: 0.7, delay: 0.8 }}
+                >
                   I create fast, intuitive, and accessible web experiences using
                   industry-standard best practices. My work spans a wide range
-                  of front-end development tasks
-                </p>
+                  of front-end development tasks.
+                </motion.p>
                 <CTA
                   href="#contact-us"
                   text="Learn More"
@@ -263,7 +346,16 @@ const Page = () => {
               <div className="text-black">
                 {skills &&
                   skills.map((e, i) => (
-                    <div key={i} className="mb-5">
+                    <motion.div
+                      key={i}
+                      className="mb-5"
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: skillsInView ? 1 : 0, y: skillsInView ? 0 : 50 }}
+                      transition={{
+                        duration: 0.7,
+                        delay: 1 + i * 0.2,
+                      }}
+                    >
                       <div className="flex justify-between items-center mb-1">
                         <h5 className="text-lg font-semibold">{e.title}</h5>
                         <span className="block text-xl font-semibold">
@@ -273,60 +365,84 @@ const Page = () => {
                       <div
                         className={`h-[5px] w-full bg-[#d3d3d3] relative before:absolute ${e.beforeWth} before:bg-[#ed143d] before:top-0 before:left-0 before:h-full`}
                       ></div>
-                    </div>
+                    </motion.div>
                   ))}
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <section id="contact-us">
-        <div className="lg:py-28 md:py-20 py-10 bg-black">
-          <div className="container">
-            <div className="text-center text-white mb-10">
-              <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
-                Contact me
-              </h2>
-              <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tigth md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3">
-                Get In Touch
-              </span>
-            </div>
-            <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-10 gap-10">
-              <div className="text-white">
-                <h4 className="capitalize md:text-xl text-lg font-semibold mb-3">
-                  Get in Touch
-                </h4>
-                <p className="md:text-base text-sm font-medium leading-normal mb-5">
-                  If you are interested in working together? Please fill out the
-                  form aside with some info about your project and I will get
-                  back to you as soon as I can. Please allow a couple days for
-                  me to respond.
-                </p>
-                {contactIcon &&
-                  contactIcon.map((e, i) => (
-                    <div key={i} className="flex gap-x-5 mb-5 items-center">
-                      <div>
-                        <Image src={e.icon} alt="Icons" />
-                      </div>
-                      <div>
-                        <p className="text-base font-semibold">{e.title}</p>
-                        <span className="block md:text-xl text-lg font-medium">
-                          {e.desc}
-                        </span>
-                      </div>
+      </motion.section>
+      <motion.section
+        id="contact-us"
+        ref={contactUsRef}
+        className="lg:py-28 md:py-20 py-10 bg-black"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: contactUsInView ? 1 : 0, y: contactUsInView ? 0 : 50 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="container">
+          <div className="text-center text-white mb-10">
+            <h2 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4">
+              Contact me
+            </h2>
+            <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tight md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3">
+              Get In Touch
+            </span>
+          </div>
+
+          <div className="grid md:grid-cols-2 grid-cols-1 md:gap-x-10 gap-10">
+            <motion.div
+              className="text-white"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: contactUsInView ? 1 : 0, x: contactUsInView ? 0 : -50 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h4 className="capitalize md:text-xl text-lg font-semibold mb-3">
+                Get in Touch
+              </h4>
+              <p className="md:text-base text-sm font-medium leading-normal mb-5">
+                If you are interested in working together? Please fill out the
+                form aside with some info about your project and I will get
+                back to you as soon as I can. Please allow a couple of days for
+                me to respond.
+              </p>
+
+              {contactIcon &&
+                contactIcon.map((e, i) => (
+                  <motion.div
+                    key={i}
+                    className="flex gap-x-5 mb-5 items-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: contactUsInView ? 1 : 0, y: contactUsInView ? 0 : 20 }}
+                    transition={{ duration: 0.6, delay: i * 0.2 }}
+                  >
+                    <div>
+                      <Image src={e.icon} alt="Icons" />
                     </div>
-                  ))}
-              </div>
-              <div className="text-white">
-                <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">
-                  Message me
-                </h4>
-                <FrontEndForm />
-              </div>
-            </div>
+                    <div>
+                      <p className="text-base font-semibold">{e.title}</p>
+                      <span className="block md:text-xl text-lg font-medium">
+                        {e.desc}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+            </motion.div>
+
+            <motion.div
+              className="text-white"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: contactUsInView ? 1 : 0, x: contactUsInView ? 0 : 50 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">
+                Message me
+              </h4>
+              <FrontEndForm />
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </main>
   )
 }
