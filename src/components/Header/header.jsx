@@ -90,7 +90,7 @@ const Header = ({
 
                             initial={{ opacity: 0, y: -30 }}
 
-                            animate={{ opacity: inView ? 0 : 1, y: inView ? 0 : -30 }}
+                            animate={{ opacity: inView ? 0 : 1, y: inView ? 0 : -20 }}
 
                             transition={{ duration: 0.6, delay: 0.9 }}
 
