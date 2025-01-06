@@ -1,5 +1,5 @@
 import "./globals.css";
-
+import { Analytics } from '@vercel/analytics/next';
 import { primary, secondary } from "../configs/font";
 import Header from "@/components/Header/header";
 import Footer from "@/components/Footer/Footer";
@@ -15,6 +15,7 @@ const RootLayout = ({ children }) => {
         <Header />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
