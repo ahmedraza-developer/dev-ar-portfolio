@@ -54,7 +54,6 @@ const Card = () => {
     return (
         <>
             {animateCard.map((e, i) => {
-
                 const { ref, inView } = useInView({
                     triggerOnce: true,
                     threshold: 0.3,
