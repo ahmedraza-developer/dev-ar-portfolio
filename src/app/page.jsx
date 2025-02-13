@@ -218,7 +218,7 @@ const Page = () => {
                 </p>
                 <Link
                   href="/ahmedraza.pdf"
-                  className={`text-white bg-[#0e1538] rounded-lg py-4 px-10 border-2 border-[#1c6cd9] my-4`}
+                  className={`inline-block text-white bg-[#0e1538] rounded-lg py-4 px-10 border-2 border-[#1c6cd9] mt-4`}
                 >
                   Download CV
                 </Link>

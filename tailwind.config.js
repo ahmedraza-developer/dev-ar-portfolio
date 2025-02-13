@@ -41,7 +41,15 @@ module.exports = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		  backgroundImage: {
+			'html5': "url('/home/html5.png')",
+			'css3': "url('/home/css3.png')",
+			'javascript': "url('/home/javascript.png')",
+			'ui-ux-design': "url('/home/ui_ux_design.png')",
+			'database': "url('/home/database.png')",
+			'programmingsigns': "url('/home/programmingsigns.png')",
+		  },
   	}
   },
   plugins: [require("tailwindcss-animate")],
