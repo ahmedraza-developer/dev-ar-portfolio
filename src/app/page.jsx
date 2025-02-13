@@ -94,20 +94,20 @@ const Page = () => {
   const { ref: aboutRef, inView: aboutInView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
-  });
+  })
 
   const { ref: servicesRef, inView: servicesInView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
-  });
+  })
   const { ref: skillsRef, inView: skillsInView } = useInView({
     triggerOnce: true,
     threshold: 0.3,
-  });
+  })
   const { ref: contactUsRef, inView: contactUsInView } = useInView({
     triggerOnce: true,
     threshold: 0.3,
-  });
+  })
   return (
     <main>
       <section>
@@ -190,7 +190,10 @@ const Page = () => {
               <motion.div
                 className="md:basis-[55%]"
                 initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: aboutInView ? 1 : 0, x: aboutInView ? 0 : -50 }}
+                animate={{
+                  opacity: aboutInView ? 1 : 0,
+                  x: aboutInView ? 0 : -50,
+                }}
                 transition={{ duration: 1 }}
               >
                 <h4 className="md:text-[25px] text-xl font-semibold py-2 leading-tigth">
@@ -226,7 +229,10 @@ const Page = () => {
               <motion.div
                 className="md:basis-[45%]"
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: aboutInView ? 1 : 0, scale: aboutInView ? 1 : 0.8 }}
+                animate={{
+                  opacity: aboutInView ? 1 : 0,
+                  scale: aboutInView ? 1 : 0.8,
+                }}
                 transition={{ duration: 1 }}
               >
                 <Image
@@ -247,7 +253,10 @@ const Page = () => {
         <motion.div
           className="lg:py-28 md:py-20 py-10 bg-black"
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: servicesInView ? 1 : 0, y: servicesInView ? 0 : 50 }}
+          animate={{
+            opacity: servicesInView ? 1 : 0,
+            y: servicesInView ? 0 : 50,
+          }}
           transition={{ duration: 1 }}
         >
           <div className="container">
@@ -262,10 +271,14 @@ const Page = () => {
             <motion.div
               className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center gap-x-10 pt-10"
               initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: servicesInView ? 1 : 0, y: servicesInView ? 0 : 50 }}
+              animate={{
+                opacity: servicesInView ? 1 : 0,
+                y: servicesInView ? 0 : 50,
+              }}
               transition={{ duration: 1 }}
             >
-              <Card /> {/* Assuming you have a Card component for each service */}
+              <Card />{" "}
+              {/* Assuming you have a Card component for each service */}
             </motion.div>
           </div>
         </motion.div>
@@ -283,7 +296,10 @@ const Page = () => {
               <motion.h2
                 className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4"
                 initial={{ y: 50, opacity: 0 }}
-                animate={{ y: skillsInView ? 0 : 50, opacity: skillsInView ? 1 : 0 }}
+                animate={{
+                  y: skillsInView ? 0 : 50,
+                  opacity: skillsInView ? 1 : 0,
+                }}
                 transition={{ duration: 0.7 }}
               >
                 My skills
@@ -291,7 +307,10 @@ const Page = () => {
               <motion.span
                 className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tigth md:before:w-10 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-10 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-10 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-11 after:-right-8 md:after:bottom-4 after:bottom-3"
                 initial={{ x: -50, opacity: 0 }}
-                animate={{ x: skillsInView ? 0 : -50, opacity: skillsInView ? 1 : 0 }}
+                animate={{
+                  x: skillsInView ? 0 : -50,
+                  opacity: skillsInView ? 1 : 0,
+                }}
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
                 What I Know
@@ -302,7 +321,10 @@ const Page = () => {
                 <motion.h4
                   className="capitalize text-xl font-semibold mb-3"
                   initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: skillsInView ? 0 : 50, opacity: skillsInView ? 1 : 0 }}
+                  animate={{
+                    y: skillsInView ? 0 : 50,
+                    opacity: skillsInView ? 1 : 0,
+                  }}
                   transition={{ duration: 0.7, delay: 0.4 }}
                 >
                   My creative skills & experiences.
@@ -310,7 +332,10 @@ const Page = () => {
                 <motion.p
                   className="text-base font-medium leading-normal mb-3"
                   initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: skillsInView ? 0 : 50, opacity: skillsInView ? 1 : 0 }}
+                  animate={{
+                    y: skillsInView ? 0 : 50,
+                    opacity: skillsInView ? 1 : 0,
+                  }}
                   transition={{ duration: 0.7, delay: 0.6 }}
                 >
                   Since embarking on my journey as a web developer nearly three
@@ -324,7 +349,10 @@ const Page = () => {
                 <motion.p
                   className="text-base font-medium leading-normal mb-3"
                   initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: skillsInView ? 0 : 50, opacity: skillsInView ? 1 : 0 }}
+                  animate={{
+                    y: skillsInView ? 0 : 50,
+                    opacity: skillsInView ? 1 : 0,
+                  }}
                   transition={{ duration: 0.7, delay: 0.8 }}
                 >
                   I create fast, intuitive, and accessible web experiences using
@@ -350,7 +378,10 @@ const Page = () => {
                       key={i}
                       className="mb-5"
                       initial={{ opacity: 0, y: 50 }}
-                      animate={{ opacity: skillsInView ? 1 : 0, y: skillsInView ? 0 : 50 }}
+                      animate={{
+                        opacity: skillsInView ? 1 : 0,
+                        y: skillsInView ? 0 : 50,
+                      }}
                       transition={{
                         duration: 0.7,
                         delay: 1 + i * 0.2,
@@ -377,7 +408,10 @@ const Page = () => {
         ref={contactUsRef}
         className="lg:py-28 md:py-20 py-10 bg-black"
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: contactUsInView ? 1 : 0, y: contactUsInView ? 0 : 50 }}
+        animate={{
+          opacity: contactUsInView ? 1 : 0,
+          y: contactUsInView ? 0 : 50,
+        }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <div className="container">
@@ -394,7 +428,10 @@ const Page = () => {
             <motion.div
               className="text-white"
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: contactUsInView ? 1 : 0, x: contactUsInView ? 0 : -50 }}
+              animate={{
+                opacity: contactUsInView ? 1 : 0,
+                x: contactUsInView ? 0 : -50,
+              }}
               transition={{ duration: 0.6 }}
             >
               <h4 className="capitalize md:text-xl text-lg font-semibold mb-3">
@@ -402,9 +439,9 @@ const Page = () => {
               </h4>
               <p className="md:text-base text-sm font-medium leading-normal mb-5">
                 If you are interested in working together? Please fill out the
-                form aside with some info about your project and I will get
-                back to you as soon as I can. Please allow a couple of days for
-                me to respond.
+                form aside with some info about your project and I will get back
+                to you as soon as I can. Please allow a couple of days for me to
+                respond.
               </p>
 
               {contactIcon &&
@@ -413,7 +450,10 @@ const Page = () => {
                     key={i}
                     className="flex gap-x-5 mb-5 items-center"
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: contactUsInView ? 1 : 0, y: contactUsInView ? 0 : 20 }}
+                    animate={{
+                      opacity: contactUsInView ? 1 : 0,
+                      y: contactUsInView ? 0 : 20,
+                    }}
                     transition={{ duration: 0.6, delay: i * 0.2 }}
                   >
                     <div>
@@ -432,7 +472,10 @@ const Page = () => {
             <motion.div
               className="text-white"
               initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: contactUsInView ? 1 : 0, x: contactUsInView ? 0 : 50 }}
+              animate={{
+                opacity: contactUsInView ? 1 : 0,
+                x: contactUsInView ? 0 : 50,
+              }}
               transition={{ duration: 0.6 }}
             >
               <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">
