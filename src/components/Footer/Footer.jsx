@@ -25,7 +25,7 @@ const Footer = () => {
                         <Image src={Whatsapp} alt="Icons" width={35} height={35} />
                     </a>
                 </div>
-                <span className="block text-center md:text-lg text-sm md:py-5 py-3 text-white font-sans">© 2024 <strong>Ahmed Raza</strong> | All Rights Reserved</span>
+                <span className="block text-center md:text-lg text-sm md:py-5 py-3 text-white font-sans">© 2025 <strong>Developer AR</strong> | All Rights Reserved</span>
             </div>
         </footer>
     )

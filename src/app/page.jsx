@@ -186,9 +186,27 @@ const Page = () => {
                 Who I Am{" "}
               </span>
             </div>
-            <div className="md:flex items-center gap-x-5">
+            <div className="flex md:flex-nowrap flex-wrap md:flex-row flex-col-reverse items-center gap-x-5">
               <motion.div
-                className="md:basis-[55%]"
+                className="md:basis-[45%]"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{
+                  opacity: aboutInView ? 1 : 0,
+                  scale: aboutInView ? 1 : 0.8,
+                }}
+                transition={{ duration: 1 }}
+              >
+                <Image
+                  src={Profile}
+                  alt="profile"
+                  height={450}
+                  width={450}
+                  objectFit="cover"
+                  className="block mx-auto md:mt-0 mt-5 object-cover rounded-md"
+                />
+              </motion.div>
+              <motion.div
+                className="md:basis-[55%] order-1"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{
                   opacity: aboutInView ? 1 : 0,
@@ -225,24 +243,6 @@ const Page = () => {
                 >
                   Download CV
                 </Link>
-              </motion.div>
-              <motion.div
-                className="md:basis-[45%]"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{
-                  opacity: aboutInView ? 1 : 0,
-                  scale: aboutInView ? 1 : 0.8,
-                }}
-                transition={{ duration: 1 }}
-              >
-                <Image
-                  src={Profile}
-                  alt="profile"
-                  height={300}
-                  width={300}
-                  objectFit="cover"
-                  className="block mx-auto md:mt-0 mt-5 object-cover rounded-md"
-                />
               </motion.div>
             </div>
           </div>

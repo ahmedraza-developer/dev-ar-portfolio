@@ -20,6 +20,7 @@ import Website4 from "media/projects/websites/4.png"
 import Website5 from "media/projects/websites/5.png"
 import Website6 from "media/projects/websites/6.png"
 import Website7 from "media/projects/websites/7.png"
+import Website8 from "media/projects/websites/8.png"
 import Ecommerce1 from "media/projects/ecommerce/1.png"
 import Ecommerce2 from "media/projects/ecommerce/2.png"
 import Lp1 from "media/projects/landing-pages/1.png"
@@ -170,6 +171,11 @@ const Projects = () => {
         "https://www.bookwritingcube.com/amazon-book-publishing-services/",
       ],
       [
+        Website8,
+        ["HTML5", "CSS3", "Javascript ES6"],
+        "https://baby-siri.netlify.app/",
+      ],
+      [
         Lp9,
         ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Slick"],
         "https://www.bookwritingcube.com/audio-book-production-services/",
@@ -295,6 +301,13 @@ const Projects = () => {
         Website7,
         ["Nextjs 14", "Tailwind CSS"],
         "https://www.mini-investments.net/",
+      ],
+    ],
+    virtualAssistant: [
+      [
+        Website8,
+        ["HTML5", "CSS3", "Javascript ES6"],
+        "https://baby-siri.netlify.app/",
       ],
     ],
     landingPages: [
@@ -436,7 +449,7 @@ const Projects = () => {
         "https://farooqaziz.netlify.app/work/infinityanimations-email-template/",
       ],
     ],
-  };
+  }
   const contactIcon = [
     {
       icon: Contact,
@@ -454,18 +467,18 @@ const Projects = () => {
       desc: "leadzahmed@gmail.com",
     },
   ]
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(6)
   const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 6);
-  };
-  const { ref:projectsRef, inView:projectsInView } = useInView({
+    setVisibleCount((prev) => prev + 6)
+  }
+  const { ref: projectsRef, inView: projectsInView } = useInView({
     triggerOnce: true,
     threshold: 0.3,
-  });
+  })
   const { ref: contactUsRef, inView: contactUsInView } = useInView({
     triggerOnce: true,
     threshold: 0.3,
-  });
+  })
   return (
     <main>
       <section>
@@ -529,104 +542,115 @@ const Projects = () => {
         </motion.div>
       </section>
       <motion.section
-      ref={projectsRef}
-      className="lg:py-[100px] md:py-[80px] py-[60px]"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: projectsInView ? 1 : 0, y: projectsInView ? 0 : 50 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-    >
-      <div className="container">
-        <div className="text-center text-black mb-5">
-          <motion.h2
-            className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: projectsInView ? 1 : 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            Projects
-          </motion.h2>
-          <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tight md:before:w-12 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-12 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-12 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-12 after:-right-8 md:after:bottom-4 after:bottom-3">
-            Behind the Code
-          </span>
-        </div>
+        ref={projectsRef}
+        className="lg:py-[100px] md:py-[80px] py-[60px]"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{
+          opacity: projectsInView ? 1 : 0,
+          y: projectsInView ? 0 : 50,
+        }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="container">
+          <div className="text-center text-black mb-5">
+            <motion.h2
+              className="lg:text-[40px] md:text-[30px] text-[25px] leading-tight font-bold pb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: projectsInView ? 1 : 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              Projects
+            </motion.h2>
+            <span className="relative inline-block px-2 font-secondary md:text-[30px] text-[20px] leading-tight md:before:w-12 before:w-7 before:h-[3px] before:bg-red-500 before:absolute md:before:-left-12 before:-left-7 md:before:bottom-4 before:bottom-3 md:after:w-12 after:w-7 after:h-[3px] after:bg-red-500 after:absolute md:after:-right-12 after:-right-8 md:after:bottom-4 after:bottom-3">
+              Behind the Code
+            </span>
+          </div>
 
-        <div className="pt-[40px]">
-          <Tabs defaultValue="all">
-            <TabsList className="flex flex-wrap bg-transparent gap-y-5 gap-x-10 h-full">
-              {Object.keys(projectsData).map((category, i) => (
-                <TabsTrigger
-                  key={i}
-                  className="xl:!w-[12%] !w-max capitalize py-3"
-                  value={category}
-                >
-                  {category}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            {Object.entries(projectsData).map(([category, items], idx) => (
-              <TabsContent key={idx} value={category} className="mt-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
-                  {items.slice(0, visibleCount).map(([img, tags, link], i) => (
-                    <motion.div
-                      key={i}
-                      className="relative group overflow-hidden h-full"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: projectsInView ? 1 : 0, y: projectsInView ? 0 : 20 }}
-                      transition={{ duration: 0.6, delay: i * 0.2 }}
-                    >
-                      <div className="overflow-hidden h-full">
-                        <Image
-                          src={img}
-                          alt={`${category} Preview`}
-                          className="group-hover:scale-105 h-full transition-all duration-500 ease-in-out"
-                        />
-                      </div>
-                      <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:block opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-end justify-between">
-                        <div className="flex flex-wrap gap-2">
-                          {tags.map((tag, j) => (
-                            <span
-                              key={j}
-                              className="text-xs md:text-sm text-white font-bold bg-opacity-50 border border-white rounded px-3 py-1"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <Link href={link} target="_blank">
-                          <Image
-                            src={Eye}
-                            alt="View Project"
-                            width={30}
-                            height={30}
-                            className="transition-transform transform hover:scale-110"
-                          />
-                        </Link>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-                {items.length > 6 && visibleCount < items.length && (
-                  <Button
-                    onClick={handleLoadMore}
-                    className="block bg-secondary border-2 transition-all ease-in-out duration-500 border-secondary text-lg text-white leading-tight font-medium h-[55px] w-[200px] rounded-md mt-10 hover:bg-transparent hover:rounded-[50px] hover:text-secondary mx-auto"
+          <div className="pt-[40px]">
+            <Tabs defaultValue="all">
+              <TabsList className="flex flex-wrap bg-transparent gap-y-5 gap-x-10 h-full">
+                {Object.keys(projectsData).map((category, i) => (
+                  <TabsTrigger
+                    key={i}
+                    className="xl:!w-[12%] !w-max capitalize py-3"
+                    value={category}
                   >
-                    Load More
-                  </Button>
-                )}
-              </TabsContent>
-            ))}
-          </Tabs>
+                    {category}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
+              {Object.entries(projectsData).map(([category, items], idx) => (
+                <TabsContent key={idx} value={category} className="mt-16">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
+                    {items
+                      .slice(0, visibleCount)
+                      .map(([img, tags, link], i) => (
+                        <motion.div
+                          key={i}
+                          className="relative group overflow-hidden h-full"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{
+                            opacity: projectsInView ? 1 : 0,
+                            y: projectsInView ? 0 : 20,
+                          }}
+                          transition={{ duration: 0.6, delay: i * 0.2 }}
+                        >
+                          <div className="overflow-hidden h-full">
+                            <Image
+                              src={img}
+                              alt={`${category} Preview`}
+                              className="group-hover:scale-105 h-full transition-all duration-500 ease-in-out"
+                            />
+                          </div>
+                          <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:block opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-end justify-between">
+                            <div className="flex flex-wrap gap-2">
+                              {tags.map((tag, j) => (
+                                <span
+                                  key={j}
+                                  className="text-xs md:text-sm text-white font-bold bg-opacity-50 border border-white rounded px-3 py-1"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <Link href={link} target="_blank">
+                              <Image
+                                src={Eye}
+                                alt="View Project"
+                                width={30}
+                                height={30}
+                                className="transition-transform transform hover:scale-110"
+                              />
+                            </Link>
+                          </div>
+                        </motion.div>
+                      ))}
+                  </div>
+                  {items.length > 6 && visibleCount < items.length && (
+                    <Button
+                      onClick={handleLoadMore}
+                      className="block bg-secondary border-2 transition-all ease-in-out duration-500 border-secondary text-lg text-white leading-tight font-medium h-[55px] w-[200px] rounded-md mt-10 hover:bg-transparent hover:rounded-[50px] hover:text-secondary mx-auto"
+                    >
+                      Load More
+                    </Button>
+                  )}
+                </TabsContent>
+              ))}
+            </Tabs>
+          </div>
         </div>
-      </div>
-    </motion.section>
+      </motion.section>
       <motion.section
         id="contact-us"
         ref={contactUsRef}
         className="lg:py-28 md:py-20 py-10 bg-black"
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: contactUsInView ? 1 : 0, y: contactUsInView ? 0 : 50 }}
+        animate={{
+          opacity: contactUsInView ? 1 : 0,
+          y: contactUsInView ? 0 : 50,
+        }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <div className="container">
@@ -643,7 +667,10 @@ const Projects = () => {
             <motion.div
               className="text-white"
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: contactUsInView ? 1 : 0, x: contactUsInView ? 0 : -50 }}
+              animate={{
+                opacity: contactUsInView ? 1 : 0,
+                x: contactUsInView ? 0 : -50,
+              }}
               transition={{ duration: 0.6 }}
             >
               <h4 className="capitalize md:text-xl text-lg font-semibold mb-3">
@@ -651,9 +678,9 @@ const Projects = () => {
               </h4>
               <p className="md:text-base text-sm font-medium leading-normal mb-5">
                 If you are interested in working together? Please fill out the
-                form aside with some info about your project and I will get
-                back to you as soon as I can. Please allow a couple of days for
-                me to respond.
+                form aside with some info about your project and I will get back
+                to you as soon as I can. Please allow a couple of days for me to
+                respond.
               </p>
 
               {contactIcon &&
@@ -662,7 +689,10 @@ const Projects = () => {
                     key={i}
                     className="flex gap-x-5 mb-5 items-center"
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: contactUsInView ? 1 : 0, y: contactUsInView ? 0 : 20 }}
+                    animate={{
+                      opacity: contactUsInView ? 1 : 0,
+                      y: contactUsInView ? 0 : 20,
+                    }}
                     transition={{ duration: 0.6, delay: i * 0.2 }}
                   >
                     <div>
@@ -681,7 +711,10 @@ const Projects = () => {
             <motion.div
               className="text-white"
               initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: contactUsInView ? 1 : 0, x: contactUsInView ? 0 : 50 }}
+              animate={{
+                opacity: contactUsInView ? 1 : 0,
+                x: contactUsInView ? 0 : 50,
+              }}
               transition={{ duration: 0.6 }}
             >
               <h4 className="capitalize md:text-xl text-lg font-semibold md:mb-3 mb-8">
