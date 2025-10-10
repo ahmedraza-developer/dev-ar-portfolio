@@ -39,7 +39,7 @@
     "@builder.io/partytown": "^0.10.3",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
@@ -47,5 +47,8 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.2.8",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }
