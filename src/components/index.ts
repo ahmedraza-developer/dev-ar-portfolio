@@ -5,6 +5,7 @@ const Navbar = dynamic(() => import("./sections/Navbar"));
 const About = dynamic(() => import("./sections/About"));
 const Services = dynamic(() => import("./sections/Services"));
 const Skills = dynamic(() => import("./sections/Skills"));
+const Experience = dynamic(() => import("./sections/Experience"));
 const Contact = dynamic(() => import("./sections/Contact"));
 const Footer = dynamic(() => import("./sections/Footer"));
 // UI Client Componets
@@ -36,6 +37,7 @@ const TooltipTrigger = dynamic(() =>
   import("./ui/tooltip").then((mod) => mod.TooltipTrigger)
 );
 const Cards = dynamic(() => import("./Cards"));
+const ChatbotWrapper = dynamic(() => import("./ChatbotWrapper"));
 
 export {
   LayoutBg,
@@ -44,6 +46,7 @@ export {
   About,
   Services,
   Skills,
+  Experience,
   Contact,
   Footer,
   // UI Components
@@ -59,5 +62,6 @@ export {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-  Cards
+  Cards,
+  ChatbotWrapper
 };

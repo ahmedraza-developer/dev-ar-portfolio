@@ -4,10 +4,11 @@ import "./globals.css";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Suspense } from "react";
-import { Contact, Footer, LayoutBg, Navbar } from "@/components";
+import { Contact, Footer, LayoutBg, Navbar, ChatbotWrapper } from "@/components";
 import LoadingScreen from "@/components/LoadingScreen";
 import CursorFollower from "@/components/CursorFollower";
 import { Toaster } from "@/components/ui/sonner";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const satisfy = Satisfy({
   variable: "--font-satisfy",
@@ -21,6 +22,8 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"],
 });
 
+
+
 export const metadata: Metadata = {
   title:
     "Ahmed Raza Portfolio – Web Design, Development &amp; Creative Solutions",
@@ -33,11 +36,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${satisfy.variable} ${montserrat.variable} font-mono antialiased cursor-[url("/cursor.svg")]`}
       >
+        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
         <NextThemesProvider
           attribute="class"
           defaultTheme="dark"
@@ -54,6 +60,7 @@ export default function RootLayout({
                 {children}
                 <Contact/>
                 <Footer/>
+                <ChatbotWrapper />
               </main>
               <Toaster />
             </Suspense>

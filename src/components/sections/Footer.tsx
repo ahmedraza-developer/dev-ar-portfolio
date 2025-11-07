@@ -11,11 +11,11 @@ export default function Footer() {
                         <div className="flex flex-wrap justify-center gap-y-5 items-center gap-x-8">
                             <a href="tel:+923187380601" className="flex items-center gap-x-2 text-sm leading-tight">
                                 <Phone className="size-4"/>
-                                <span>+92 318 7380601</span>
+                                <span>Phone</span>
                             </a>
                             <a href="mailto:leadzahmed@gmail.com" className="flex items-center gap-x-2 text-sm leading-tight">
                                 <Mail className="size-4"/>
-                                <span>leadzahmed@gmail.com</span>
+                                <span>Email</span>
                             </a>
                             <a href="https://maps.app.goo.gl/VkfxyBu6Bh7huHSc7" target="_blank" className="flex items-center gap-x-2 text-sm leading-tight">
                                 <MapPin className="size-4"/>

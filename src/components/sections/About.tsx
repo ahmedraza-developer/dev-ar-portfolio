@@ -21,18 +21,7 @@ export default function About() {
           <div className="grid grid-cols-12 gap-x-5 gap-y-8 items-center md:pt-[60px] pt-[40px]">
             <div className="xl:col-span-8 lg:col-span-6 col-span-12 max-w-[880px]">
               <p className="xl:text-lg md:text-base text-sm text-primary leading-relaxed font-medium">
-                I&apos;m a 23-year-old web developer with a focus on front-end
-                development. I know how to use HTML5, CSS3, JavaScript (ES6),
-                React.js, Next.js, and TailwindCSS. I love working in
-                fast-paced, team-oriented settings and am passionate about
-                developing responsive, user-friendly web applications. My
-                identity is shaped by my innovative thinking, drive for lifelong
-                learning, and pursuit of progress. With a strong background in
-                client relations and project management, I make sure that
-                projects are completed on schedule without sacrificing quality
-                in order to satisfy clients. I enjoy solving problems, and in
-                every project I work on, usability and aesthetics are equally
-                important to me.
+                I&apos;m a 24-year-old front-end developer who turns ambitious ideas into polished, high-performing web experiences. My toolkit spans HTML5, CSS3, modern JavaScript (ES6), React, Next.js, and Tailwind CSS, and I&apos;m comfortable pairing emerging technologies with established best practices to deliver robust solutions. I rely on Git and GitHub to steer collaborative workflows, and I routinely architect data layers with services like Supabase, Convex, Neon, or MongoDB to keep interfaces fast and reliable. Colleagues know me for staying calm under pressure, championing accessibility, and keeping teams aligned through clear communication and structured project management. Whether I&apos;m shaping a brand-new interface or refining an existing product, I focus on measurable impact, motion crafted with Framer Motion, and a user journey that feels intuitive from the very first interaction.
               </p>
               <CTA
                 link="/resume/updated-resume.pdf"
