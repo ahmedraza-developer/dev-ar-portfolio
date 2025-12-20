@@ -22,7 +22,7 @@ export default function Footer() {
                                 <span>Location</span>
                             </a>
                         </div>
-                        <p className="sm:text-base text-[13px] text-center leading-tight font-normal">© 2025 Developer Ahmed Raza | All Rights Reserved</p>
+                        <p className="sm:text-base text-[13px] text-center leading-tight font-normal">© 2026 Developer Ahmed Raza | All Rights Reserved</p>
                     </div>
                 </div>
             </div>

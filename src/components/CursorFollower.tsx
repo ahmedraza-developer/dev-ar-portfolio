@@ -35,7 +35,7 @@ export default function CursorFollower() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 rounded-full bg-gradient-to-r from-fuchsia-600 to-pink-600 pointer-events-none z-50"
+      className="fixed top-0 left-0 rounded-full bg-gradient-to-r from-fuchsia-600 to-pink-600 pointer-events-none z-50 hidden md:block"
       animate={{
         width: isHovering ? 48 : 32,
         height: isHovering ? 48 : 32,

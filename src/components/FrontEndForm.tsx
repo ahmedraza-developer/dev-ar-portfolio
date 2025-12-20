@@ -126,7 +126,7 @@ const FrontEndForm: React.FC<FrontEndFormProps> = ({ label = false, css = "" }) 
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className={`grid grid-cols-1 gap-5 ${css}`}
             >
-                <div className="grid sm:grid-cols-2 grid-cols-1 gap-x-5 items-center">
+                <div className="grid sm:grid-cols-2 grid-cols-1 gap-x-5 gap-y-5 items-center">
                     <FormField
                         control={form.control}
                         name="name"
