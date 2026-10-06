@@ -1,4 +1,4 @@
-import Contact from "@/components/sections/contact";
+import Contact from "@/components/sections/Contact";
 import About from "@/components/sections/home/about";
 import Experience from "@/components/sections/home/experience";
 import Hero from "@/components/sections/home/hero";
