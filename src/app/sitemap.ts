@@ -1,28 +1,29 @@
-import { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/seo";
+import type { MetadataRoute } from "next";
+import { allProjects } from "@/data/projects";
+import { absoluteUrl } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = siteConfig.url;
-  const currentDate = new Date();
+  const lastModified = new Date();
 
   return [
     {
-      url: baseUrl,
-      lastModified: currentDate,
+      url: absoluteUrl("/"),
+      lastModified,
       changeFrequency: "monthly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/projects`,
-      lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/thank-you`,
-      lastModified: currentDate,
+      url: absoluteUrl("/projects"),
+      lastModified,
       changeFrequency: "monthly",
-      priority: 0.5,
+      priority: 0.8,
     },
+    ...allProjects.map((project) => ({
+      url: absoluteUrl(`/projects/${project.slug}`),
+      lastModified,
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+      images: project.gallery.map((image) => absoluteUrl(image)),
+    })),
   ];
 }
