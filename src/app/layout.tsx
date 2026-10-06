@@ -1,46 +1,92 @@
 import type { Metadata, Viewport } from "next";
-import { Satisfy, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Suspense } from "react";
-import { Contact, Footer, LayoutBg, Navbar } from "@/components";
-import LoadingScreen from "@/components/LoadingScreen";
-import CursorFollower from "@/components/CursorFollower";
+import { MotionProvider } from "@/components/motion/motion-provider";
+import SiteFooter from "@/components/sections/site-footer";
+import SiteHeader from "@/components/sections/site-header";
+import { GoogleAnalytics } from "@/components/seo/google-analytics";
+import { JsonLd } from "@/components/seo/json-ld";
+import { BackToTop } from "@/components/ui/back-to-top";
+import { Cursor } from "@/components/ui/cursor";
 import { Toaster } from "@/components/ui/sonner";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
-import GoogleVerification from "@/components/GoogleVerification";
-import LiveChat from "@/components/LiveChat";
-import StructuredData from "@/components/StructuredData";
-import { defaultMetadata, siteConfig } from "@/lib/seo";
-import { getPersonStructuredData, getWebSiteStructuredData } from "@/lib/structured-data";
-const satisfy = Satisfy({
-  variable: "--font-satisfy",
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { site } from "@/data/site";
+import { siteGraph } from "@/lib/structured-data";
+import { cn } from "@/lib/utils";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["400"],
   display: "swap",
-  preload: true,
 });
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
-  preload: true,
 });
 
-export const metadata: Metadata = defaultMetadata;
+// Display accent only: the italic used for emphasised words in headings.
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: site.title,
+    template: `%s · ${site.name}`,
+  },
+  description: site.description,
+  applicationName: `${site.name} Portfolio`,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  category: "technology",
+  keywords: [...site.keywords],
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "profile",
+    locale: site.locale,
+    url: "/",
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+    firstName: site.name.split(" ")[0],
+    lastName: site.name.split(" ").slice(1).join(" "),
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+    creator: site.twitterHandle,
+  },
+  ...(site.googleSiteVerification && {
+    verification: { google: site.googleSiteVerification },
+  }),
+  formatDetection: { telephone: false, address: false, email: false },
+};
 
 export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#a855f7" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f6f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
   ],
-  colorScheme: "dark light",
 };
 
 export default function RootLayout({
@@ -48,41 +94,43 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
-  const siteUrl = siteConfig.url;
-  const personStructuredData = getPersonStructuredData(siteUrl);
-  const webSiteStructuredData = getWebSiteStructuredData(siteUrl);
-
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${satisfy.variable} ${montserrat.variable} font-mono antialiased cursor-[url("/cursor.svg")]`}
-      >
-        <GoogleVerification />
-        <StructuredData data={[personStructuredData, webSiteStructuredData]} />
-        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
-        <NextThemesProvider
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+      className={cn(
+        geistSans.variable,
+        geistMono.variable,
+        instrumentSerif.variable,
+      )}
+    >
+      <body className="min-h-svh antialiased">
+        <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider delayDuration={0}>
-            <Suspense fallback={<LoadingScreen/>}>
-              <main className="relative z-10 overflow-hidden">
-                <LayoutBg />
-                <LoadingScreen />
-                <CursorFollower />
-                <Navbar />
-                {children}
-                <Contact/>
-                <Footer/>
-                <LiveChat />
-              </main>
-              <Toaster />
-            </Suspense>
-          </TooltipProvider>
-        </NextThemesProvider>
+          <a
+            href="#main"
+            className="sr-only z-50 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          >
+            Skip to content
+          </a>
+          <MotionProvider>
+            <SiteHeader />
+            <main id="main" className="pt-20">
+              {children}
+            </main>
+            <SiteFooter />
+            <BackToTop />
+            <Cursor />
+          </MotionProvider>
+          <Toaster position="top-right" />
+        </ThemeProvider>
+        <JsonLd data={siteGraph()} />
+        <GoogleAnalytics />
       </body>
     </html>
   );
