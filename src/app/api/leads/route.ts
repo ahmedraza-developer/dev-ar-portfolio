@@ -55,6 +55,9 @@ export async function POST(request: NextRequest) {
   const { website, ...lead } = parsed.data;
 
   if (website?.trim()) {
+    console.warn(
+      `[leads] Honeypot filled, mail skipped. ip=${ip} value=${JSON.stringify(website)}`,
+    );
     return apiSuccess();
   }
 
@@ -62,11 +65,18 @@ export async function POST(request: NextRequest) {
     const mailResponse = await mail(lead);
 
     if (!mailResponse?.messageId) {
+      console.error("[leads] Mail sent without a messageId.", mailResponse);
       return apiError(500, "Failed to send message. Please try again later.");
     }
 
+    console.info("[leads] Mail sent.", {
+      messageId: mailResponse.messageId,
+      accepted: mailResponse.accepted,
+      rejected: mailResponse.rejected,
+    });
     return apiSuccess();
   } catch (error) {
+    console.error("[leads] Mail failed.", error);
     const message =
       error instanceof Error ? error.message : "An unexpected error occurred.";
     return apiError(500, message);

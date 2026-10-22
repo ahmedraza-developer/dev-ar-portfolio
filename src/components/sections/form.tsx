@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useId, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,6 +43,8 @@ function RequiredMark() {
 export default function ContactForm({ className }: { className?: string }) {
   const id = useId();
   const router = useRouter();
+  // Read-only until focused, so browser autofill skips the honeypot.
+  const [honeypotArmed, setHoneypotArmed] = useState(false);
   const {
     control,
     handleSubmit,
@@ -119,7 +121,13 @@ export default function ContactForm({ className }: { className?: string }) {
         {...register("website")}
         type="text"
         tabIndex={-1}
+        readOnly={!honeypotArmed}
+        onFocus={() => setHoneypotArmed(true)}
         autoComplete="off"
+        data-1p-ignore
+        data-lpignore="true"
+        data-bwignore
+        data-form-type="other"
         aria-hidden="true"
         className="pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0"
       />

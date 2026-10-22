@@ -86,6 +86,198 @@ function enrichProject(base: BaseProject): Project {
 
 const rawProjects: BaseProject[] = [
   {
+    id: 18,
+    title: "Velamora",
+    description:
+      "A premium ready-to-wear fashion store with its own brand identity, a full shopping and checkout flow, order tracking and an admin dashboard for sales, stock and demand.",
+    featured: true,
+    role: "Product Engineer (brand, design, front end, back end)",
+    overview: [
+      "Velamora is a modern clothing label for the US and international markets, built from nothing: the name, the logo, the colour system and every visual on the site. The brief was a store that feels like a luxury fashion house rather than a template, while still being fast and easy to buy from.",
+      "I designed and built the whole thing: an editorial home page, eight collection pages, shop pages with filters for size, colour, price and category, product pages with colour-aware galleries and size guides, a bag and a single-page checkout, customer accounts with email verification, a wishlist and a track-your-order page with a delivery timeline. Behind it is an admin dashboard for orders, products, inventory, customers, discounts, reviews and analytics.",
+      "It runs on Next.js 16 with Cache Components and Partial Prerendering, on Neon: Postgres with Drizzle, Neon Auth for accounts, Object Storage for product photos and a Neon Function that collects first-party analytics. The store went through a full security review and is covered by end-to-end tests against the production build.",
+    ],
+    highlights: [
+      {
+        title: "Brand identity from scratch",
+        detail:
+          "Name, Didone monogram seal, serif wordmark and an ivory, ink and clay palette — plus generated garment artwork in each product's real colourways, so the catalogue looks finished before any photoshoot.",
+      },
+      {
+        title: "Checkout that can't be gamed",
+        detail:
+          "Prices, discounts, shipping and tax are recalculated on the server, and stock and discount uses change inside one database transaction, so two buyers can never get the last item.",
+      },
+      {
+        title: "Order tracking without leaking data",
+        detail:
+          "Customers follow every step from confirmed to delivered. An order only opens with its number and email or a signed private cookie — never with the email sitting in the URL.",
+      },
+      {
+        title: "Admin built around demand",
+        detail:
+          "Revenue, visitors and conversion at a glance, plus hot sellers, a demand score from views, add-to-carts and wishlists, low-stock alerts and days of stock left at the current sales rate.",
+      },
+      {
+        title: "Privacy-first analytics",
+        detail:
+          "No third-party trackers or cookies: page views, product views, add-to-carts and searches go to a Neon Function and straight into Postgres, feeding the funnel and traffic heatmap.",
+      },
+      {
+        title: "Security reviewed",
+        detail:
+          "Strict security headers, rate limiting on checkout, sign-in and every form, email verification by one-time code, origin checks and admin access re-checked on every action.",
+      },
+    ],
+    image: "/projects/velamora/1.png",
+    gallery: [
+      "/projects/velamora/1.png",
+      "/projects/velamora/2.png",
+      "/projects/velamora/3.png",
+      "/projects/velamora/4.png",
+      "/projects/velamora/5.png",
+      "/projects/velamora/6.png",
+      "/projects/velamora/7.png",
+      "/projects/velamora/8.png",
+    ],
+    category: "ecommerce",
+    tags: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Neon Postgres",
+      "Drizzle ORM",
+      "Neon Auth",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Playwright",
+    ],
+    liveLink: "https://www.velamoraclothing.store/",
+    deliverables: ["Brand Identity", "E-commerce Build", "Admin Dashboard", "Security Review"],
+    infrastructure: [
+      {
+        title: "Frontend",
+        items: [
+          { label: "Framework", value: "Next.js 16, React 19, React Compiler" },
+          { label: "Rendering", value: "Cache Components, Partial Prerendering" },
+          { label: "UI", value: "Tailwind CSS v4, shadcn/ui on Base UI" },
+        ],
+      },
+      {
+        title: "Backend & Data",
+        items: [
+          { label: "Database", value: "Neon Postgres + Drizzle ORM" },
+          { label: "Auth", value: "Neon Auth (Better Auth), email OTP" },
+          { label: "Storage & Functions", value: "Neon Object Storage, Neon Function analytics" },
+        ],
+      },
+      {
+        title: "Quality & Delivery",
+        items: [
+          { label: "Testing", value: "Playwright end-to-end against production" },
+          { label: "Security", value: "CSP, rate limiting, signed order access" },
+          { label: "Hosting", value: "Vercel + Neon, custom domain" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 17,
+    title: "Nodelane",
+    description:
+      "Project management for agencies and freelancers: a realtime board for the team and a private portal for every client, with pinned feedback, approvals and invoicing.",
+    featured: true,
+    role: "Product Engineer (design, front end, back end)",
+    overview: [
+      "Nodelane is a project manager built for client work. Tools like Linear and Trello are made for the people doing the work; agencies also have a client who wants to see progress, give feedback and sign things off without learning a task tool. Nodelane gives the team a fast kanban board and gives each client a private portal at a link — no account, no seat.",
+      "I designed and built the whole product: a Linear-style interface in light and dark, a keyboard-first board with drag and drop, a task panel with rich text, files and a timeline, feedback pins dropped right on design images, versioned approvals, time tracking and numbered PDF invoices. Boards, comments and presence update live for everyone on a project.",
+      "It runs on Next.js 16 and React 19 with Server Components and Server Actions, on Neon Postgres with Drizzle. Realtime needs no paid service: Postgres triggers publish changes over LISTEN/NOTIFY to a WebSocket function. The app went through a full security review and is covered by Playwright end-to-end tests that also run against production.",
+    ],
+    highlights: [
+      {
+        title: "Client portal at a private link",
+        detail:
+          "Clients see only the tasks you share, comment, and approve or request changes. Links are 256-bit tokens stored hashed, and can expire or be revoked.",
+      },
+      {
+        title: "Feedback pinned to the design",
+        detail:
+          "Click anywhere on an uploaded design to drop a numbered pin and start a thread. Team and client both pin, reply and resolve, by mouse or keyboard.",
+      },
+      {
+        title: "Realtime board and presence",
+        detail:
+          "Moves, comments and approvals appear for everyone instantly, and avatars show who is looking at which task — Postgres LISTEN/NOTIFY into a WebSocket function.",
+      },
+      {
+        title: "Versioned approvals",
+        detail:
+          "Every sign-off is recorded per version, and an approval moves the task to Done on its own. “Which one was final?” always has an answer.",
+      },
+      {
+        title: "Time tracking to invoices",
+        detail:
+          "Timers on every task turn billable hours into a numbered PDF invoice. Billed time is locked so the same hour can never be invoiced twice.",
+      },
+      {
+        title: "Keyboard first and accessible",
+        detail:
+          "⌘K search across tasks and projects, drag and drop from the keyboard with screen-reader announcements, visible focus and reduced-motion support.",
+      },
+    ],
+    image: "/projects/nodelane/1.png",
+    gallery: [
+      "/projects/nodelane/1.png",
+      "/projects/nodelane/2.png",
+      "/projects/nodelane/3.png",
+      "/projects/nodelane/4.png",
+      "/projects/nodelane/5.png",
+      "/projects/nodelane/6.png",
+      "/projects/nodelane/7.png",
+      "/projects/nodelane/8.png",
+    ],
+    category: "crm",
+    tags: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Neon Postgres",
+      "Drizzle ORM",
+      "WebSockets",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Playwright",
+    ],
+    liveLink: "https://nodelane.vercel.app/",
+    deliverables: ["Product Design", "Full-stack Build", "Realtime Collaboration", "End-to-end Tests"],
+    infrastructure: [
+      {
+        title: "Frontend",
+        items: [
+          { label: "Framework", value: "Next.js 16, React 19, React Compiler" },
+          { label: "UI", value: "Tailwind CSS v4, shadcn/ui, Motion" },
+          { label: "Interactions", value: "dnd-kit, Tiptap, cmdk" },
+        ],
+      },
+      {
+        title: "Backend & Realtime",
+        items: [
+          { label: "Database", value: "Neon Postgres + Drizzle ORM" },
+          { label: "Auth", value: "Neon Auth (Better Auth), organizations" },
+          { label: "Realtime", value: "LISTEN/NOTIFY → WebSocket function" },
+        ],
+      },
+      {
+        title: "Quality & Delivery",
+        items: [
+          { label: "Testing", value: "Playwright end-to-end + Vitest" },
+          { label: "Security", value: "CSP, rate limiting, tenant isolation" },
+          { label: "Hosting", value: "Vercel + Neon, GitHub Actions CI" },
+        ],
+      },
+    ],
+  },
+  {
     id: 1,
     title: "Children Book Illustration",
     description:
