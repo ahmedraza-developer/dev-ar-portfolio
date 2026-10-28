@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import portrait from "media/home/profile-ahmed-raza.png";
+import portrait from "media/home/profile-ahmed-raza1.png";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { Counter } from "@/components/motion/counter";
 import { Stagger, StaggerItem } from "@/components/motion/reveal";
