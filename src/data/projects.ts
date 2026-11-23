@@ -5,7 +5,8 @@ export type ProjectCategory =
   | "ai"
   | "ecommerce"
   | "crm"
-  | "communication";
+  | "communication"
+  | "mobile";
 
 export type InfrastructureGroup = {
   title: string;
@@ -66,6 +67,7 @@ const categoryLabels: Record<Exclude<ProjectCategory, "all">, string> = {
   ecommerce: "E-commerce",
   crm: "Dashboard",
   communication: "Communication App",
+  mobile: "Mobile App",
 };
 
 type BaseProject = Omit<Project, "slug" | "gallery" | "featured" | "role"> & {
@@ -96,6 +98,7 @@ const rawProjects: BaseProject[] = [
       "Velamora is a modern clothing label for the US and international markets, built from nothing: the name, the logo, the colour system and every visual on the site. The brief was a store that feels like a luxury fashion house rather than a template, while still being fast and easy to buy from.",
       "I designed and built the whole thing: an editorial home page, eight collection pages, shop pages with filters for size, colour, price and category, product pages with colour-aware galleries and size guides, a bag and a single-page checkout, customer accounts with email verification, a wishlist and a track-your-order page with a delivery timeline. Behind it is an admin dashboard for orders, products, inventory, customers, discounts, reviews and analytics.",
       "It runs on Next.js 16 with Cache Components and Partial Prerendering, on Neon: Postgres with Drizzle, Neon Auth for accounts, Object Storage for product photos and a Neon Function that collects first-party analytics. The store went through a full security review and is covered by end-to-end tests against the production build.",
+      "The same store also has a native iOS and Android app, built on a versioned mobile API from this backend (see Velamora Mobile App).",
     ],
     highlights: [
       {
@@ -177,6 +180,80 @@ const rawProjects: BaseProject[] = [
           { label: "Testing", value: "Playwright end-to-end against production" },
           { label: "Security", value: "CSP, rate limiting, signed order access" },
           { label: "Hosting", value: "Vercel + Neon, custom domain" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 19,
+    title: "Velamora Mobile App",
+    description:
+      "The native iOS and Android app for the Velamora fashion store: editorial browsing, a three-tap path from shop to bag, checkout, accounts and order tracking.",
+    featured: true,
+    role: "Mobile Engineer (design, app, mobile API)",
+    overview: [
+      "Velamora's shoppers spend most of their time on their phones, so the store needed an app that feels as considered as the website rather than a wrapped web view. I designed and built a native app for iOS and Android with Expo and React Native.",
+      "The app covers the whole store: an editorial home with a parallax hero, curated collections and a trending list, a shop with search and filters, product pages with colour-aware galleries and size selection, a wishlist, a bag and checkout, accounts with email verification, and order tracking with a delivery timeline.",
+      "It talks to the same backend as the website through a versioned mobile API (v1) that I added to the store, with shared pricing and order logic, so prices, stock and discounts always match the web.",
+    ],
+    highlights: [
+      {
+        title: "Native tab bar on each platform",
+        detail:
+          "System tabs with Liquid Glass on iOS 26 and Material on Android, with live badge counts for the bag and the wishlist.",
+      },
+      {
+        title: "Browse to bag in three taps",
+        detail:
+          "Product, size and add to bag, with haptic feedback along the way.",
+      },
+      {
+        title: "One backend, two storefronts",
+        detail:
+          "A versioned API for catalogue, auth, wishlist, checkout and orders, sharing pricing and order rules with the website.",
+      },
+      {
+        title: "Secure sign-in",
+        detail:
+          "Email and one-time-code verification, with the session token kept in the device's secure storage.",
+      },
+      {
+        title: "Order tracking",
+        detail:
+          "Every order opens with its timeline from confirmed to delivered, and an order can also be tracked by its number.",
+      },
+      {
+        title: "Fast, cached data",
+        detail:
+          "Server data is cached and refreshed in the background, so screens open instantly and stay in sync.",
+      },
+    ],
+    image: "/projects/velamora-app/1.png",
+    gallery: [
+      "/projects/velamora-app/1.png",
+      "/projects/velamora-app/2.png",
+      "/projects/velamora-app/3.png",
+      "/projects/velamora-app/4.png",
+      "/projects/velamora-app/5.png",
+    ],
+    category: "mobile",
+    tags: ["Expo", "React Native", "Expo Router", "TypeScript", "TanStack Query", "Next.js API"],
+    deliverables: ["iOS & Android App", "App Design", "Mobile API", "Checkout & Order Tracking"],
+    infrastructure: [
+      {
+        title: "App",
+        items: [
+          { label: "Framework", value: "Expo SDK 58, React Native" },
+          { label: "Navigation", value: "Expo Router with native tabs" },
+          { label: "Data", value: "TanStack Query, secure storage" },
+        ],
+      },
+      {
+        title: "Backend",
+        items: [
+          { label: "API", value: "Versioned v1 API on the Next.js store" },
+          { label: "Database", value: "Neon Postgres + Drizzle ORM" },
+          { label: "Shared logic", value: "Pricing, cart and order rules" },
         ],
       },
     ],
@@ -278,6 +355,174 @@ const rawProjects: BaseProject[] = [
     ],
   },
   {
+    id: 20,
+    title: "Wanderlux",
+    description:
+      "A premium travel agency website for visas, flights, hotels and car rental, with a working search for each service and scroll-driven GSAP animation.",
+    featured: true,
+    role: "Front-End Engineer (design and build)",
+    overview: [
+      "Wanderlux is a travel agency website built to feel like a premium travel brand while still doing real work: every one of its four services (visa, flights, hotels and car rental) has a search that validates input, shows loading states and returns results.",
+      "The results are mock data that behaves like real data. Flight times and fares come from real airport coordinates, hotel and car prices scale with each city's cost index, and a seeded generator keeps results stable for the same search. Every service and destination has its own prerendered page with its own metadata.",
+      "It is built on Next.js 16 and React 19 with Tailwind CSS v4 and GSAP. Sections are Server Components by default, only the interactive parts run on the client, and every animation respects reduced-motion settings.",
+    ],
+    highlights: [
+      {
+        title: "Search for all four services",
+        detail:
+          "One tabbed panel with field validation (date order, same-city and own-country checks), loading states and animated result cards. A new service needs only one config module.",
+      },
+      {
+        title: "Animated flight routes",
+        detail:
+          "Flight results open with a boarding-pass route card: the arc draws itself and a plane flies along it, with distance and time from the route data.",
+      },
+      {
+        title: "Destination and service pages",
+        detail:
+          "Prerendered pages with fares, stays and visa rules, opened from their cards with a shared-element view transition.",
+      },
+      {
+        title: "Scroll-driven storytelling",
+        detail:
+          "Split-text headlines, a pinned horizontal process section, a marquee that follows scroll speed, counters and a magnetic call to action.",
+      },
+      {
+        title: "Accessible by default",
+        detail:
+          "Semantic landmarks, ARIA tabs, keyboard-friendly controls, descriptive alt text on every image and full reduced-motion support.",
+      },
+      {
+        title: "Responsive to 320px",
+        detail:
+          "Every section, including the search and the horizontal process, is designed down to small phones.",
+      },
+    ],
+    image: "/projects/wanderlux/1.png",
+    gallery: [
+      "/projects/wanderlux/1.png",
+      "/projects/wanderlux/2.png",
+      "/projects/wanderlux/3.png",
+      "/projects/wanderlux/4.png",
+      "/projects/wanderlux/5.png",
+    ],
+    category: "websites",
+    tags: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "GSAP"],
+    liveLink: "https://travel-agency-website-ochre.vercel.app/",
+    deliverables: ["Website Design", "Search Experience", "GSAP Animation", "Static Detail Pages"],
+    infrastructure: [
+      {
+        title: "Frontend",
+        items: [
+          { label: "Framework", value: "Next.js 16, React 19, React Compiler" },
+          { label: "Styling", value: "Tailwind CSS v4 with design tokens" },
+          { label: "Animation", value: "GSAP: ScrollTrigger, SplitText, DrawSVG, MotionPath" },
+        ],
+      },
+      {
+        title: "Experience & Delivery",
+        items: [
+          { label: "Rendering", value: "Static generation, View Transitions" },
+          { label: "Accessibility", value: "ARIA tabs, reduced motion" },
+          { label: "Hosting", value: "Vercel" },
+        ],
+      },
+    ],
+  },
+  {
+    id: 21,
+    title: "Prima Energie",
+    description:
+      "Corporate website for an engineering and construction company in Pakistan and Saudi Arabia, in English, Arabic and Chinese. I took it over for fixes and updates through to launch.",
+    role: "Front-End Developer (fixes and updates)",
+    overview: [
+      "Prima Energie is an engineering and construction company working across Pakistan and Saudi Arabia on civil works, infrastructure, roads, power and manpower. Its website already existed in English, Arabic and Chinese when it came to me for fixes and updates before launch.",
+      "I rebuilt the projects section around a single data file with photo galleries and a full-screen viewer, added a trust section with animated figures, a mobile action bar to call or book a meeting for the visitor's country, scroll reveals and a back-to-top button, and moved contact details into one site config.",
+      "I also prepared the site for its hosting, including routing so that direct visits to inner pages load correctly.",
+    ],
+    highlights: [
+      {
+        title: "Data-driven project gallery",
+        detail:
+          "Every project, with its client, scope, features and photos in English and Arabic, comes from one data file and opens in a gallery with a full-screen view.",
+      },
+      {
+        title: "Mobile action bar",
+        detail:
+          "On phones, a fixed bar lets visitors call or book in one tap, using the Pakistan or Saudi number for the selected country.",
+      },
+      {
+        title: "Trust section",
+        detail:
+          "Years of experience, team size, safety training and certifications, with figures that count up as they come into view.",
+      },
+      {
+        title: "Three languages",
+        detail:
+          "New sections follow the site's English, Arabic and Chinese content, including right-to-left layout for Arabic.",
+      },
+    ],
+    image: "/projects/prima-energie/1.png",
+    gallery: [
+      "/projects/prima-energie/1.png",
+      "/projects/prima-energie/2.png",
+      "/projects/prima-energie/3.png",
+      "/projects/prima-energie/4.png",
+    ],
+    category: "websites",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui"],
+    liveLink: "https://primaenergie.com.pk/",
+    deliverables: ["Bug Fixes", "New Sections", "Project Gallery", "Launch Support"],
+  },
+  {
+    id: 22,
+    title: "Book Writing Cube",
+    description:
+      "A set of service landing pages for a book writing and publishing company, each built around a free-quote form and trust logos from major publishers.",
+    overview: [
+      "Book Writing Cube offers writing, illustration, publishing, audiobook and marketing services for authors. Each service runs its own paid campaigns, so each one needed a landing page of its own.",
+      "I built the landing pages for children's book illustration, book publishing, Amazon publishing, audiobook narration, bestseller campaigns and book marketing. They share one design system, and every page leads with a quote form above the fold.",
+    ],
+    highlights: [
+      {
+        title: "One page per service",
+        detail:
+          "Six landing pages, each with its own headline, offer and imagery, matched to the campaign that sends traffic to it.",
+      },
+      {
+        title: "Quote form above the fold",
+        detail:
+          "A short free-quote form sits beside the headline on every page, with phone and chat calls to action repeated further down.",
+      },
+      {
+        title: "Trust built in",
+        detail:
+          "Publisher and press logos, review badges and book carousels sit close to the form to support the decision.",
+      },
+      {
+        title: "Shared design system",
+        detail:
+          "Header, form, logo strip and carousels are shared, so a new service page is quick to build and stays on brand.",
+      },
+    ],
+    image: "/projects/book-writing-cube/1.png",
+    gallery: [
+      "/projects/book-writing-cube/1.png",
+      "/projects/book-writing-cube/2.png",
+      "/projects/book-writing-cube/3.png",
+      "/projects/landing-pages/6.png",
+      "/projects/landing-pages/7.png",
+      "/projects/landing-pages/8.png",
+      "/projects/landing-pages/9.png",
+      "/projects/landing-pages/10.png",
+      "/projects/landing-pages/11.png",
+    ],
+    category: "landingPages",
+    tags: ["HTML 5", "CSS 3", "Bootstrap 4", "Jquery", "Slick"],
+    liveLink: "https://www.bookwritingcube.us/",
+    deliverables: ["Six Landing Pages", "Quote Forms", "Responsive Design"],
+  },
+  {
     id: 1,
     title: "Children Book Illustration",
     description:
@@ -312,7 +557,12 @@ const rawProjects: BaseProject[] = [
           "Call and chat buttons repeat at each stage, so the next step is always in view.",
       },
     ],
-    image: "/projects/landing-pages/1.png",
+    image: "/projects/children-book/1.png",
+    gallery: [
+      "/projects/children-book/1.png",
+      "/projects/children-book/2.png",
+      "/projects/children-book/3.png",
+    ],
     category: "landingPages",
     tags: ["HTML 5", "CSS 3", "Jquery", "Slick"],
     liveLink: "https://jumpto1.us/children-book-illustration-services/",
@@ -360,7 +610,12 @@ const rawProjects: BaseProject[] = [
           "Navigation stays in reach while scrolling and collapses into a menu on small screens.",
       },
     ],
-    image: "/projects/landing-pages/2.png",
+    image: "/projects/ios-app/1.png",
+    gallery: [
+      "/projects/ios-app/1.png",
+      "/projects/ios-app/2.png",
+      "/projects/ios-app/3.png",
+    ],
     category: "landingPages",
     tags: ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla"],
     liveLink: "https://jumpto1.us/ios-app-development-services/",
@@ -402,7 +657,12 @@ const rawProjects: BaseProject[] = [
           "“Talk to an SEO expert” buttons and phone links appear throughout the page.",
       },
     ],
-    image: "/projects/landing-pages/5.png",
+    image: "/projects/seo-services/1.png",
+    gallery: [
+      "/projects/seo-services/1.png",
+      "/projects/seo-services/2.png",
+      "/projects/seo-services/3.png",
+    ],
     category: "landingPages",
     tags: ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Embla", "GSAP"],
     liveLink: "https://seoresultspro.com/seo-services/",
@@ -436,7 +696,10 @@ const rawProjects: BaseProject[] = [
           "The menu opens from a button, keeping the first screen free of a navigation bar.",
       },
     ],
-    image: "/projects/websites/1.png",
+    image: "/projects/crystallite/1.png",
+    gallery: [
+      "/projects/crystallite/1.png",
+    ],
     category: "websites",
     tags: ["Nextjs 13", "Bootstrap 5", "Jquery"],
     rating: 4.5,
@@ -484,7 +747,12 @@ const rawProjects: BaseProject[] = [
           "Images are served through Next.js image optimisation at sizes matched to the device.",
       },
     ],
-    image: "/projects/websites/2.png",
+    image: "/projects/infinity-animations/1.png",
+    gallery: [
+      "/projects/infinity-animations/1.png",
+      "/projects/infinity-animations/2.png",
+      "/projects/infinity-animations/3.png",
+    ],
     category: "websites",
     tags: ["Nextjs 14", "Tailwind Css", "Shadcn Ui"],
     liveLink: "https://infinityanimations.com/",
@@ -552,7 +820,15 @@ const rawProjects: BaseProject[] = [
           "Name, email, phone and comments fields, plus a “how did you hear about us” dropdown.",
       },
     ],
-    image: "/projects/websites/5.png",
+    image: "/projects/bestselling-publisher/1.png",
+    gallery: [
+      "/projects/bestselling-publisher/1.png",
+      "/projects/bestselling-publisher/2.png",
+      "/projects/bestselling-publisher/3.png",
+      "/projects/landing-pages/12.png",
+      "/projects/landing-pages/15.png",
+      "/projects/landing-pages/16.png",
+    ],
     category: "websites",
     tags: ["Nextjs 13", "Tailwind CSS", "Jquery", "Javascript", "Embla"],
     liveLink: "https://bestsellingpublisher.com/",
@@ -594,66 +870,16 @@ const rawProjects: BaseProject[] = [
           "Everything runs client-side as a static site, so it loads instantly and costs nothing to host.",
       },
     ],
-    image: "/projects/websites/8.png",
+    image: "/projects/baby-siri/1.png",
+    gallery: [
+      "/projects/baby-siri/1.png",
+    ],
     category: "ai",
     tags: ["HTML5", "CSS3", "Javascript ES6", "Web Speech API"],
     liveLink: "https://baby-siri.netlify.app/",
     rating: 4.6,
     ratingCount: 11,
     deliverables: ["Voice Commands", "Spoken Responses", "Static, No-backend Build"],
-  },
-  {
-    id: 8,
-    title: "AI Website Builder",
-    description:
-      "Prompt-to-app builder: describe an app in chat and an AI agent generates it. Built with Next.js, tRPC, Prisma, Inngest, Clerk and E2B sandboxes.",
-    overview: [
-      "Vibe is an AI website builder: you describe what you want in a chat box and an AI agent builds the app or site for you.",
-      "It runs on Next.js 16, React 19 and Tailwind v4 with a full agent stack behind it — tRPC for type-safe APIs, Inngest for the background generation jobs, E2B cloud sandboxes to run the generated code, Prisma with Neon Postgres for data, and Clerk for authentication.",
-    ],
-    highlights: [
-      {
-        title: "Prompt box",
-        detail:
-          "A single “What would you like to build?” input with a keyboard shortcut to submit.",
-      },
-      {
-        title: "Starter prompts",
-        detail:
-          "One-click ideas such as a Netflix clone, kanban board, file manager, store page or admin dashboard.",
-      },
-      {
-        title: "Background generation",
-        detail:
-          "Builds run as Inngest jobs, so a long generation never blocks the interface.",
-      },
-      {
-        title: "Sandboxed execution",
-        detail: "Generated code runs in isolated E2B cloud sandboxes.",
-      },
-      {
-        title: "Accounts",
-        detail: "Sign-in and the user menu are handled by Clerk.",
-      },
-      {
-        title: "Type-safe data layer",
-        detail: "tRPC procedures over Prisma and a Neon Postgres database.",
-      },
-    ],
-    image: "/projects/websites/11.png",
-    category: "ai",
-    tags: [
-      "trpc",
-      "Inngest",
-      "Clerk",
-      "Prisma",
-      "Neon",
-      "Docker",
-      "E2B Cloud Sandboxes",
-    ],
-    rating: 4.7,
-    ratingCount: 1,
-    deliverables: ["Prompt-to-app Generation", "Sandboxed Execution", "Authentication"],
   },
   {
     id: 9,
@@ -688,7 +914,12 @@ const rawProjects: BaseProject[] = [
           "Delivery-location selector, cart counter, wishlist link and an account menu.",
       },
     ],
-    image: "/projects/ecommerce/1.png",
+    image: "/projects/fsf-mart/1.png",
+    gallery: [
+      "/projects/fsf-mart/1.png",
+      "/projects/fsf-mart/2.png",
+      "/projects/fsf-mart/3.png",
+    ],
     category: "ecommerce",
     tags: ["HTML 5", "CSS 3", "Bootstrap 5", "Jquery", "Javascript"],
     liveLink: "https://fsf-mart-pk.netlify.app/",
@@ -726,7 +957,11 @@ const rawProjects: BaseProject[] = [
         detail: "The interface is assembled from Shadcn UI components styled with Tailwind CSS.",
       },
     ],
-    image: "/projects/ecommerce/2.png",
+    image: "/projects/shopland/1.png",
+    gallery: [
+      "/projects/shopland/1.png",
+      "/projects/shopland/2.png",
+    ],
     category: "ecommerce",
     tags: [
       "Nextjs 14",
@@ -799,7 +1034,11 @@ const rawProjects: BaseProject[] = [
           "Global search, a notification badge, a profile menu and community links.",
       },
     ],
-    image: "/projects/websites/10.png",
+    image: "/projects/macrolight/1.png",
+    gallery: [
+      "/projects/macrolight/1.png",
+      "/projects/macrolight/2.png",
+    ],
     category: "crm",
     tags: [
       "Vite",
@@ -853,7 +1092,12 @@ const rawProjects: BaseProject[] = [
         detail: "A search bar across the top of the workspace.",
       },
     ],
-    image: "/projects/websites/9.png",
+    image: "/projects/slack-clone/1.png",
+    gallery: [
+      "/projects/slack-clone/1.png",
+      "/projects/slack-clone/2.png",
+      "/projects/slack-clone/3.png",
+    ],
     category: "communication",
     tags: [
       "Next.js",
@@ -929,7 +1173,12 @@ const rawProjects: BaseProject[] = [
         detail: "Help centre, sign-up and login links sit in a utility bar above the header.",
       },
     ],
-    image: "/projects/websites/3.png",
+    image: "/projects/ready-app/1.png",
+    gallery: [
+      "/projects/ready-app/1.png",
+      "/projects/ready-app/2.png",
+      "/projects/ready-app/3.png",
+    ],
     category: "websites",
     tags: ["HTML 5", "CSS 3", "Javascript", "Jquery", "Slick", "Bootstrap 5"],
     rating: 4.6,

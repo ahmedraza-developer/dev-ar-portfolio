@@ -19,7 +19,7 @@ export const site = {
   email: "leadzahmed@gmail.com",
   phone: "+923187380601",
   twitterHandle: "@AhmedRazaa956",
-  resume: "/resume/updated-resume.pdf",
+  resume: "/resume/ahmed-raza-resume.pdf",
   portrait: "/home/profile-ahmed-raza.png",
   mapUrl: "https://maps.app.goo.gl/VkfxyBu6Bh7huHSc7",
   careerStartYear: 2022,
