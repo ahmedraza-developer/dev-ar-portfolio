@@ -71,21 +71,13 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 mb-6 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <p className="font-mono">Built with Next.js, TypeScript &amp; Tailwind CSS</p>
         </div>
       </Container>
-
-      {/* Oversized wordmark, cropped by the footer's bottom edge. */}
-      <p
-        aria-hidden
-        className="pointer-events-none -mb-[0.22em] mt-6 text-center text-[17.5vw] leading-none font-semibold tracking-[-0.06em] whitespace-nowrap text-foreground/[0.06] select-none"
-      >
-        {site.name}
-      </p>
     </footer>
   );
 }
