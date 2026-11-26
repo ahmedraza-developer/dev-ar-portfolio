@@ -355,6 +355,76 @@ const rawProjects: BaseProject[] = [
     ],
   },
   {
+    id: 23,
+    title: "Kodevane Clinic Platform",
+    description:
+      "A multi-clinic platform for dental and aesthetic clinics: a patient website with booking, an AI voice receptionist, and a front desk dashboard with instant replies, review requests and rebooking reminders.",
+    featured: true,
+    role: "Full-Stack Engineer (design, build and AI setup)",
+    overview: [
+      "Clinics lose patients in the gaps: calls that ring out after hours, enquiries nobody answers for a day, and patients who are never asked for a review or reminded to come back. This platform closes those gaps for each clinic it hosts.",
+      "Every clinic gets its own patient website with upfront prices, dentist profiles and a four-step booking flow, plus an AI voice receptionist that answers fee, timing and doctor questions and takes bookings, and an instant reply for anyone who leaves their number. Behind it, a front desk dashboard collects website forms, missed calls, messages and AI calls in one list, next to appointments and a summary of every call.",
+      "An admin area creates clinics and sets them up for five markets (Pakistan, the US, the UK, the UAE and Portugal), each with its own currency, timezone and voice assistant that speaks the local language, such as Urdu or Arabic. In the demo, patient messages are simulated on screen.",
+    ],
+    highlights: [
+      {
+        title: "AI voice receptionist",
+        detail:
+          "Tap-to-talk on the website and a voice assistant per market that answers questions and takes bookings. Every call is summarized and logged by outcome, and booked or urgent calls are emailed to the clinic.",
+      },
+      {
+        title: "Private front desk dashboard",
+        detail:
+          "Each clinic signs in to its own dashboard: today's enquiries, average reply time, bookings, a seven-day booking chart and today's schedule. Past visits wait to be marked done or missed, and marking one done sends the review request.",
+      },
+      {
+        title: "One list for every enquiry",
+        detail:
+          "Website forms, missed calls, messages and AI calls land in one leads list with status tabs, source filters, search and the reply time of each lead.",
+      },
+      {
+        title: "Automations with live previews",
+        detail:
+          "Speed-to-lead replies, Google review requests, six-month rebooking reminders and win-back campaigns, each with editable wording and a phone preview.",
+      },
+      {
+        title: "Multi-clinic and secure",
+        detail:
+          "Per-clinic dashboards with hashed passwords, signed cookies, a nonce-based Content Security Policy, row-level security and database rate limits.",
+      },
+    ],
+    image: "/projects/clinic-ai-receptionist/1.png",
+    gallery: [
+      "/projects/clinic-ai-receptionist/1.png",
+      "/projects/clinic-ai-receptionist/2.png",
+      "/projects/clinic-ai-receptionist/3.png",
+      "/projects/clinic-ai-receptionist/4.png",
+      "/projects/clinic-ai-receptionist/5.png",
+    ],
+    category: "ai",
+    tags: ["Next.js 16", "React 19", "TypeScript", "Supabase", "Voice AI", "Tailwind CSS"],
+    liveLink: "https://kodevane-clinic.vercel.app/c/bright-smile-dental-7952",
+    deliverables: ["Clinic Website", "AI Voice Receptionist", "Front Desk Dashboard", "Automations"],
+    infrastructure: [
+      {
+        title: "Application",
+        items: [
+          { label: "Framework", value: "Next.js 16, React 19, TypeScript" },
+          { label: "Data", value: "Supabase Postgres with row-level security" },
+          { label: "Voice", value: "Vapi web voice assistant, one per market" },
+        ],
+      },
+      {
+        title: "Security",
+        items: [
+          { label: "Sessions", value: "Signed cookies, scrypt-hashed passwords" },
+          { label: "Headers", value: "Nonce-based Content Security Policy" },
+          { label: "Abuse", value: "Rate limits, honeypot and signed form tokens" },
+        ],
+      },
+    ],
+  },
+  {
     id: 20,
     title: "Wanderlux",
     description:
@@ -711,7 +781,6 @@ const rawProjects: BaseProject[] = [
     title: "Infinity Animations",
     description:
       "Marketing website for a video animation studio, with a filterable video portfolio, video testimonials and lead forms, built with Next.js 14.",
-    featured: true,
     overview: [
       "Infinity Animations needed a portfolio that could sell creative work without slowing the experience down. I built a Next.js 14 site with Tailwind CSS and Shadcn UI — focused on motion-friendly layouts, a strong showcase flow, and contact paths that convert visitors into leads.",
       "The studio produces explainer, product, promotional and training videos, so the site is built around watching work: a video portfolio filtered by animation style, a grid of ten services, a four-step production process and client testimonials, including video testimonials.",
@@ -932,7 +1001,6 @@ const rawProjects: BaseProject[] = [
     title: "Modern E-commerce",
     description:
       "Fashion storefront built with Next.js 14, TypeScript, Tailwind CSS and Shadcn UI, with a product catalogue, cart and validated checkout forms.",
-    featured: true,
     overview: [
       "A modern storefront built with Next.js 14 and TypeScript — product discovery, cart flow, and checkout UX designed to feel fast and trustworthy. Shadcn UI and React Hook Form kept the interface consistent while making form validation reliable across the purchase journey.",
     ],
@@ -1059,7 +1127,6 @@ const rawProjects: BaseProject[] = [
     title: "Slack Clone Real Time Communication",
     description:
       "Slack-style team chat with workspaces, channels, direct messages, threads and image sharing, built with Next.js, Convex and TypeScript.",
-    featured: true,
     overview: [
       "A full-stack Slack-style communication app with real-time messaging, channels, and file sharing. Built on Next.js with Convex for live data, tRPC for type-safe APIs, and NextAuth for authentication — designed for responsive collaboration across devices.",
       "The layout follows the product it is modelled on: a workspace rail, a sidebar of channels and direct messages, and a message pane with a rich-text composer. Messages appear for everyone in the channel as they are sent.",
